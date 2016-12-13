@@ -6,31 +6,23 @@ require "../zxcd9.php";
     $_SESSION['pageid'] = $_GET['id'];
   $query = "SELECT firstname, middlename, lastname, nickname, sex, birthdate, emailaddress, contactnumber, designation, position, employstatus, employdate, fundsource, region, province, municipality, comptype, compyear, compstatus, compnotes, inactive, feeling FROM hr_db WHERE id = :id";
   $query_params = array(':id' => $_GET['id']);
-        try 
-        { 
+        try { 
             $stmt = $db->prepare($query); 
             $result = $stmt->execute($query_params);
-        } 
-        catch(PDOException $ex) 
-        { 
+        } catch(PDOException $ex) { 
             echo "failed";
             die;
         }
-
         $row = $stmt->fetch();
         $filter = $row['region'];
         if ($filter == "NPMO") {
           $filter = "";
         }
-function timeago($ptime)
-{
+function timeago($ptime) {
     $etime = time() - $ptime;
-
-    if ($etime < 1)
-    {
+    if ($etime < 1){
         return 'just now';
     }
-
     $a = array( 365 * 24 * 60 * 60  =>  'year',
                  30 * 24 * 60 * 60  =>  'month',
                       24 * 60 * 60  =>  'day',
@@ -45,19 +37,15 @@ function timeago($ptime)
                        'minute' => 'minutes',
                        'second' => 'seconds'
                 );
-
-    foreach ($a as $secs => $str)
-    {
+    foreach ($a as $secs => $str) {
         $d = $etime / $secs;
-        if ($d >= 1)
-        {
+        if ($d >= 1) {
             $r = round($d);
             return $r . ' ' . ($r > 1 ? $a_plural[$str] : $str) . ' ago';
         }
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -87,7 +75,6 @@ function timeago($ptime)
  #large { font-size: 72px; }
  #regular { font-size: 20px; }
  .wrapped { width: 350px; }
-
 body {
     background-color: #f7f9fb;
     background-size: cover;
@@ -136,7 +123,6 @@ body {
   width: 90px;
   text-align: center;
 }
-
 .spinner > div {
   width: 20px;
   height: 50px;
@@ -146,13 +132,11 @@ body {
   -webkit-animation: sk-bouncedelay 1.6s infinite ease-in-out both;
   animation: sk-bouncedelay 1.6s infinite ease-in-out both;
 }
-
 .spinner .bounce1 {
     background: red;
   -webkit-animation-delay: -1.2s;
   animation-delay: -1.2s;
 }
-
 .spinner .bounce2 {
     background: yellow;
   -webkit-animation-delay: -0.8s;
@@ -164,12 +148,10 @@ body {
   -webkit-animation-delay: -0.4s;
   animation-delay: -0.4s;
 }
-
 @-webkit-keyframes sk-bouncedelay {
   0%, 80%, 100% { -webkit-transform: scale(0) }
   40% { -webkit-transform: scale(1.0) }
 }
-
 @keyframes sk-bouncedelay {
   0%, 80%, 100% { 
     -webkit-transform: scale(0.0);
@@ -193,14 +175,12 @@ body {
 .vcenter {
   min-height: 90%;  
   min-height: 90vh; 
-
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex; 
-  
-    -webkit-box-align : center;
+      -webkit-box-align : center;
   -webkit-align-items : center;
        -moz-box-align : center;
        -ms-flex-align : center;
@@ -277,16 +257,12 @@ tbody tr {
 </style>
 </head>
 <body>
-
-          <div id="box" style="margin-bottom:1em">
-
-<?php require "../nav.php"; ?>
-
-
-
+         <div id="box" style="margin-bottom:1em">
+<?php 
+require "../nav.php"; 
+?>
   <div class="col-md-3 padfix padfix2" style="border:solid 1px #c5d6de;margin-left:4em;background:#fff;text-align:center;padding:2em">
       <div style="margin-left:1em;background:#fff;text-align:center;padding:1em;padding-top:0">
-
 <?php
 if ($_SESSION['permlvl']>0 || ($_SESSION['permlvl']<1 && $_SESSION['id']==$_SESSION['pageid'])  ) { 
 ?>
@@ -317,33 +293,23 @@ if ($_SESSION['permlvl']>0 || ($_SESSION['permlvl']<1 && $_SESSION['id']==$_SESS
           $byte = $db->prepare("SELECT SUM(amt) as total FROM bytez m WHERE m.hrdbid='".$_GET['id']."' ");
           $byte->execute();
           $bytez = $byte->fetch();
-
-
     try {
         $admin = $db->prepare("SELECT count(id) as encoded FROM DOCDB WHERE hrdbid=:hrdbida");
         $admin->bindParam(':hrdbida', $_SESSION['pageid']);
         $admin->execute();
         $admun=$admin->fetch();
-          
-        } catch(PDOException $e) {
+  } catch(PDOException $e) {
               echo "Error: " . $e->getMessage();
         }
-
-  try {
+    try {
         $adminU = $db->prepare("SELECT groupname FROM hr_groups WHERE HRDBid=:hrdbida");
         $adminU->bindParam(':hrdbida', $_SESSION['pageid']);
         $adminU->execute();
         $admunit=$adminU->fetch();
-          
-        } catch(PDOException $e) {
+  } catch(PDOException $e) {
               echo "Error: " . $e->getMessage();
         }
-
-
-
-          
-          ?> 
-
+   ?> 
           <br>
           <span style="font-size:15px;font-weight:200;margin-top:1em">
           <?php
@@ -359,7 +325,6 @@ if ($_SESSION['permlvl']>0 || ($_SESSION['permlvl']<1 && $_SESSION['id']==$_SESS
           <?php if ($row['region'] == "NPMO") { echo $row['region']; } else { echo $row['region'].' - '.$row['province'].' - '.$row['municipality']; }?>
           </span><br>
           </div>
-
           <div class="dropdown" style="padding-top:0">
           <?php
             if ($_SESSION['permlvl']>0) {
@@ -392,38 +357,31 @@ if ($_SESSION['permlvl']>0 || ($_SESSION['permlvl']<1 && $_SESSION['id']==$_SESS
           Bytez: <b><?php echo number_format($bytez['total']); ?></b><span class="glyphicon glyphicon-flash"></span><br>
 
 
-          <?php  if($admunit['groupname']=="Administrative Support Unit") {  ?>
+          <?php  if($admunit['groupname']=="Administrative Support Unit") {  
+          ?>
            <span class="glyphicon glyphicon glyphicon-th"  rel="popover" data-placement="top" data-trigger="hover" ></span>
           Encoded:
-          <?php echo "<b>".$admun['encoded']."</b><br>"; } ?> 
-
-
-          <hr style="height:1px;border:none;color:#c5d6de;background-color:#c5d6de; margin-right:-30px; margin-left:-30px; margin-top:0.75em"/>
-
-
-              <table style="width:100%" id="userdetails" style="border:2px solid red;text-align:left">
+          <?php echo "<b>".$admun['encoded']."</b><br>"; } 
+          ?> 
+<hr style="height:1px;border:none;color:#c5d6de;background-color:#c5d6de; margin-right:-30px; margin-left:-30px; margin-top:0.75em"/>
+           <table style="width:100%" id="userdetails" style="border:2px solid red;text-align:left">
                 <tr><td style="font-size:14px"><b><span class="glyphicon glyphicon-envelope"></span> </b></td><td style="font-size:14px;text-align:left"><?php echo $row['emailaddress'];?></td></tr>
                 <tr><td style="font-size:14px"><b><span class="glyphicon glyphicon-earphone"></span> </b></td><td style="font-size:14px;text-align:left"><?php echo $row['contactnumber'];?></td></tr>
                 <tr><td style="font-size:14px"><b><span class="glyphicon glyphicon-calendar"></span> </b></td><td style="font-size:14px;text-align:left"><?php echo $row['employdate'];?></td></tr>
-               
-                <?php if ($_SESSION['permlvl']>0) { ?>
-                <tr style="color:#d9534f;font-size:14px"><td><b>Employment: </b></td><td style="font-size:14px"><?php echo $row['employstatus'];?></td></tr>
+            <?php if ($_SESSION['permlvl']>0) { 
+            ?>
+            <tr style="color:#d9534f;font-size:14px"><td><b>Employment: </b></td><td style="font-size:14px"><?php echo $row['employstatus'];?></td></tr>
                 <tr style="color:#d9534f;font-size:14px"><td><b>Fund Source: </b></td><td style="font-size:14px"><?php echo $row['fundsource'];?></td></tr>
                 <tr style="color:#d9534f;font-size:14px"><td><b>Birthdate: </b></td><td style="font-size:14px"><?php echo $row['birthdate'];?></td></tr>
                 <?php } ?>
-              </table>
-
+            </table>
             <hr style="height:1px;border:none;color:#c5d6de;background-color:#c5d6de; margin-right:-30px; margin-left:-30px;margin-bottom:0.75em"/>
-                <h6 style="text-align:center width:100%">LOGIN ATTEMPTS</h6>
+            <h6 style="text-align:center width:100%">LOGIN ATTEMPTS</h6>
             <hr style="height:1px;border:none;color:#c5d6de;background-color:#c5d6de; margin-right:-30px; margin-left:-30px; margin-top:0.75em"/>
-                
-
-      <div id="container" style="min-width: 200px; height: 180px; max-width: 200px; margin: 0 auto"></div>
-
+            <div id="container" style="min-width: 200px; height: 180px; max-width: 200px; margin: 0 auto"></div>
       <hr style="height:1px;border:none;color:#c5d6de;background-color:#c5d6de; margin-right:-30px; margin-left:-30px;margin-bottom:0.75em"/>
       <h6 style="text-align:center width:100%">WORKING GROUPS &nbsp;<span class="glyphicon glyphicon-question-sign" id="tooltip1" data-toggle="popover" data-original-title="Technical Working Groups" data-content="<span class='glyphicon glyphicon-star' style='color:#ffcc09'></span> - Indicates head / focal person<br><b>NITWG</b> - National Inter-agency TWG<br><b>DSWD</b> - TWG within DSWD<br><b>SLP</b> - TWG within SLP" rel="popover" data-placement="top" data-trigger="hover" ></span></h6>
       <hr style="height:1px;border:none;color:#c5d6de;background-color:#c5d6de; margin-right:-30px; margin-left:-30px; margin-top:0.75em"/>
-
          <table style="width:100%" style="padding:1em;text-align:left" id="userdetails">
               <tr><td colspan="2" style="font-size:14px; text-align:center"><b> &nbsp;<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#requestTWG" style="margin-top:2px;padding:0;padding-left:3px;padding-right:3px;font-size:11px;font-weight:bold">Request Change</button> &nbsp;<?php if ($_SESSION['id']==9) { echo '<button type="button" class="btn btn-info" data-toggle="modal" data-target="#twgmodal" style="margin-top:2px;padding:0;padding-left:3px;padding-right:3px;font-weight:bold;font-size:11px">Add</button>'; } ?></b></td></tr>
                                   <?php
@@ -435,15 +393,14 @@ if ($_SESSION['permlvl']>0 || ($_SESSION['permlvl']<1 && $_SESSION['id']==$_SESS
                                       echo "Error: " . $e->getMessage();
                                   }//endtry
                                       while ($row4 = $stmt3->fetch(PDO::FETCH_NUM, PDO::FETCH_ORI_NEXT)) {
-                                        
-                                        if ($row4[3]==1) {
+                                      if ($row4[3]==1) {
                                           $row4[3]=" &nbsp;<span class='glyphicon glyphicon-star' style='color:#ffcc09'></span>";
-                                        } else {
+                                    } else {
                                           $row4[3]="";
                                         }
-                                        if ($row4[1]==null) {
+                                     if ($row4[1]==null) {
                                           echo '<tr><td style="font-size:12px">'.$row4[0].$row4[3].'</td><td style="font-size:13px;"></td></tr>'; 
-                                        } else {
+                                   } else {
                                           echo '<tr><td style="font-size:12px">'.$row4[0].$row4[3].'</td><td style="font-size:13px;"><center>'.$row4[1].'</center></td></tr>'; 
                                         }
                                       }
@@ -452,11 +409,8 @@ if ($_SESSION['permlvl']>0 || ($_SESSION['permlvl']<1 && $_SESSION['id']==$_SESS
             </div>
           </div>
         </div>
-
   <div class="col-md-8 padfix padfix2" style="border:solid 1px #c5d6de;margin-left:1em;background:#fff;text-align:center;margin-bottom:1em">
-
       <div style="margin-left:1em;background:#fff;text-align:center;padding:1em;">
-
           <b style="font-size:20px">
 <?php if ($row['nickname'] != "") {
             echo $row['nickname'];
@@ -472,29 +426,22 @@ if ($_SESSION['permlvl']>0 || ($_SESSION['permlvl']<1 && $_SESSION['id']==$_SESS
                       </div>
                     </div>
                 </div>
-
           <table style="margin:1em;width:90%">            
 <?php
       $stmtcom = $db->prepare("SELECT t.firstname, m.wall_msg, m.wallposted, t.region, t.id, m.wallpostid FROM hr_wallposts m LEFT JOIN hr_db t ON m.wallposter=t.id WHERE m.wallowner = :wallowner ORDER BY m.wallpostid DESC LIMIT 10");
       $stmtcom->bindParam(':wallowner', $_GET['id']);
       $stmtcom->execute();
       while ($row8 = $stmtcom->fetch(PDO::FETCH_NUM, PDO::FETCH_ORI_NEXT)) {
-
-
-        if($_SESSION['permlvl']>0 || $_SESSION['id']==$row8[4]) {
+      if($_SESSION['permlvl']>0 || $_SESSION['id']==$row8[4]) {
             echo '<tr style="cursor:default;"><td style="font-size:15px;vertical-align:middle"><div class="col-sm-12" style="text-align:left;line-height:1.1;padding-left:0.7em"><span class="text" id="small">'.$row8[1].'</span><br><span style="font-size:12px"><a href="http://slp.ph/hr/user.php?id='.$row8[4].'" style="color:#00ADDe;text-decoration:none">'.ucwords(strtolower($row8[0])).'</a></span><span style="color:#444;font-size:12px"> ('.$row8[3].') <span style="color:#888;font-size:12px">'.timeago(strtotime($row8[2])).'</span></span></span>&nbsp;&nbsp;<span class="glyphicon glyphicon-edit" onclick="editwp('.$row8[5].');" style="color:#34495e;font-size:12px"></span>&nbsp;<span class="glyphicon glyphicon-remove" onclick="delwp('.$row8[5].');" style="color:#e74c3c;font-size:12px"></span><br><br><br></div><div class="clearfix"></div></div></td></tr>';
-          }else{
+     }else{
              echo '<tr style="cursor:default;"><td style="font-size:15px;vertical-align:middle"><div class="col-sm-12" style="text-align:left;line-height:1.1;padding-left:0.7em"><span class="text" id="small">'.$row8[1].'</span></p><br><span style="font-size:12px"><a href="http://slp.ph/hr/user.php?id='.$row8[4].'" style="color:#00ADDe;text-decoration:none">'.ucwords(strtolower($row8[0])).'</a></span><span style="color:#444;font-size:12px"> ('.$row8[3].') <span style="color:#888;font-size:12px">'.timeago(strtotime($row8[2])).'</span></span></span><br><br><br></div><div class="clearfix"></div></div></td></tr>';
-
           }
-
       }
 ?>
-
           </table>
         </div>
       </div>  
-
   <div class="col-md-8 padfix padfix2" style="border:solid 1px #c5d6de;margin-left:1em;background:#fff;text-align:center;margin-bottom:1em">
       <div style="margin-left:1em;background:#fff;text-align:left;padding:1em">
             <h3 style="margin-bottom:0"><b>ROVER</b></h3>
@@ -572,15 +519,13 @@ if ($_SESSION['permlvl']>0 || ($_SESSION['permlvl']<1 && $_SESSION['id']==$_SESS
                         },
                         { 
                            "aTargets":[2],
-                           "fnCreatedCell": function(nTd, sData, oData, iRow, iCol)
-                            {
+                           "fnCreatedCell": function(nTd, sData, oData, iRow, iCol) {
                                 $(nTd).css('width', '20%');
                             }
                         },
                         { 
                            "aTargets":[5],
-                           "fnCreatedCell": function(nTd, sData, oData, iRow, iCol)
-                            {
+                           "fnCreatedCell": function(nTd, sData, oData, iRow, iCol) {
                                 $(nTd).css('font-size', '14px');
                             },
                             "mData": null,
@@ -588,10 +533,9 @@ if ($_SESSION['permlvl']>0 || ($_SESSION['permlvl']<1 && $_SESSION['id']==$_SESS
                                 return '<td><span style="color:#00AADe;font-weight:bold;">'+data[3]+'</span> - '+data[5]+'</td>';
                             }
                         },
-                        { 
+                       { 
                            "aTargets":[8],
-                           "fnCreatedCell": function(nTd, sData, oData, iRow, iCol)
-                            {
+                           "fnCreatedCell": function(nTd, sData, oData, iRow, iCol) {
                                 $(nTd).css('text-align', 'center');
                                 $(nTd).css('font-size', '14px');
                             },
@@ -618,9 +562,7 @@ $('#viewdata').on( 'click', 'tbody tr', function () {
           var redirection = $(this).attr('id');
           window.location.href = "viewrover.php?id="+redirection;
         });
-
             </script>
-
           <div class="col-md-10 padfix padfix2" style="border:0;background:#fff;text-align:left;padding-left:8em;margin-bottom:1em;">
             <div style="padding-top:3em; <?php if ($_SESSION['permlvl'] > 0 || ($_SESSION['id'] == $_GET['id'])) { echo ''; } else { echo 'display:none;'; } ;?>">
               <form id="postRover" action="" method="post">
@@ -637,7 +579,6 @@ $('#viewdata').on( 'click', 'tbody tr', function () {
                             </div><!-- /input-group -->
                           </div>
                         </div>
-
                         <div class="form-group">
                             <div class="input-group">
                               <input type="text" class="form-control" aria-label="..." placeholder="End Date" id="enddate" name="enddate">
@@ -661,8 +602,8 @@ $('#viewdata').on( 'click', 'tbody tr', function () {
                               $sql->execute();
                          //     $p=$prof->fetch(PDO::FETCH_ASSOC);
                         
-                        while($hreventname=$sql->fetch(PDO::FETCH_ASSOC))
-                        {
+                      while($hreventname=$sql->fetch(PDO::FETCH_ASSOC))
+                      {
                       ?>
                         <option value=" <?php echo $hreventname['hreventname']; ?>"> <?php echo $hreventname['hreventname']; ?> </option>
                     
@@ -672,7 +613,7 @@ $('#viewdata').on( 'click', 'tbody tr', function () {
                             echo "Error: " . $e->getMessage();
                             }//en
                    
-                        ?>
+                      ?>
                       </select>
                     <!-- upto this -->  
                           </div>
@@ -686,9 +627,7 @@ $('#viewdata').on( 'click', 'tbody tr', function () {
 $sql = "SELECT id, CONCAT(lastname, ', ', firstname) as name FROM hr_db";
 //$partnerIDArray = [];
 //$partnerArray = [];
-
-foreach ($db->query($sql) as $results)
-{
+foreach ($db->query($sql) as $results) {
   $partnerIDArray[] = intval($results["id"]);
   $partnerArray[] = $results["name"];
 }
@@ -734,45 +673,36 @@ $(function () {
     });
 });
 });
-</script></form>
-                            <div class="form-group">
-                                    <input type="text" name="autocompleteajax" id="autocompleteajax" class="form-control" placeholder="Tag other people.."/>
-                                    <input type="hidden" id="autocomplete-ajax-x" disabled="disabled"/>
-                            </div>
-                            <span id="tagpart" style="padding-left:5px;display:none">Tagged:</span>
-                            <div class="form-group" style="margin-bottom:0.2em;" id="idg">
-                                  <input name="subsector" id="subsector" value="" type="">
-                            </div>
-
-                            <button id="addrover" class="btn btn-success pull-right" style="">Add Record</button>
-                  </div>
+</script>
+</form>
+          <div class="form-group">
+                <input type="text" name="autocompleteajax" id="autocompleteajax" class="form-control" placeholder="Tag other people.."/>
+                <input type="hidden" id="autocomplete-ajax-x" disabled="disabled"/>
           </div>
-          
-      </div>
+                <span id="tagpart" style="padding-left:5px;display:none">Tagged:</span>
+                <div class="form-group" style="margin-bottom:0.2em;" id="idg">
+                <input name="subsector" id="subsector" value="" type="">
+          </div>
+                <button id="addrover" class="btn btn-success pull-right" style="">Add Record</button>
+              </div>
+          </div>
+       </div>
     </div>
-  </div></div>
-
-
-
+</div></div>
 </div><!-- Modal -->
       <div class="modal fade" id="myModal" role="dialog" style="margin-top:3em">
         <div class="modal-dialog modal-sm">
-
           <div class="modal-content" style="padding:1em;padding-top:0.5em;">
                   <h3 style="color:#5cb85c;margin-bottom:6px">Success!</h3>
                   <span style="font-size:13px" id="sucsubtext">Profile picture uploaded.</span><br><br>
                   <button type="button" class="btn btn-primary pull-right" style="background:#5cb85c;border:0;margin-top:0;padding:5px 10px 5px 10px" id="okaybtn" data-dismiss="modal">Okay</button>
                   <div class="clearfix"></div>
           </div>
-          
         </div>
       </div>
-
-
-<!-- Modal -->
+    <!-- Modal -->
   <div class="modal fade" id="requestTWG" role="dialog">
     <div class="modal-dialog">
-    
       <!-- Modal content-->
       <div class="modal-content" style="padding:1em">
         <div class="modal-body">
@@ -794,7 +724,6 @@ $(function () {
               <div class="clearfix"></div>
         </div>
       </div>
-      
     </div>
   </div>
     <!-- Modal -->
@@ -824,14 +753,12 @@ $(function () {
                     $at->bindParam(':id', $_SESSION['pageid']);
                     $at->execute();
                     $rows=$at->fetch();
-            
-                 } catch(PDOException $e) {
+            } catch(PDOException $e) {
                   echo "Error: " . $e->getMessage();
                   }//endtry
-if ( ($_SESSION['permlvl']>0 && $rows['hrdbid']==$_SESSION['pageid']) || ($_SESSION['permlvl']<1 && $rows['hrdbid']==$_SESSION['pageid']) ) { 
+             if ( ($_SESSION['permlvl']>0 && $rows['hrdbid']==$_SESSION['pageid']) || ($_SESSION['permlvl']<1 && $rows['hrdbid']==$_SESSION['pageid']) ) { 
 // reupload 
-  ?>        
-            
+?>        
             <button type="button" id="profileBtnRe" class="btn btn-info pull-left" style="padding:6;margin-top:1.2em;margin-bottom:2em">
             <span class="glyphicon glyphicon-cloud-upload"></span> Reupload</button>
             <br><br>
@@ -839,27 +766,24 @@ if ( ($_SESSION['permlvl']>0 && $rows['hrdbid']==$_SESSION['pageid']) || ($_SESS
  }
 if ( ($_SESSION['permlvl']>0 && $rows['hrdbid']!=$_SESSION['pageid']) || ($_SESSION['permlvl']<1 && $rows['hrdbid']!=$_SESSION['pageid']) ) { 
 // upload 
-?>
+ ?>
             <button type="button" id="profileBtn" class="btn btn-info pull-left" style="padding:6;margin-top:1.2em;margin-bottom:2em">
             <span class="glyphicon glyphicon-cloud-upload"></span> Upload</button>
             <br><br>
 <?php 
 }
-
 ?>
   </form>
             </body>
             </html>  
-        </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
-
-  <!-- Modal -->
+<!-- Modal -->
   <div class="modal fade" id="twgmodal" role="dialog">
     <div class="modal-dialog">
-    
       <!-- Modal content-->
       <div class="modal-content" style="padding:1em;padding-top:0">
         <div class="modal-body" style="padding-top:0">
@@ -897,7 +821,6 @@ if ( ($_SESSION['permlvl']>0 && $rows['hrdbid']!=$_SESSION['pageid']) || ($_SESS
               <div class="clearfix"></div>
         </div>
       </div>
-      
     </div>
   </div>
   <script type="text/javascript">
@@ -940,8 +863,7 @@ $("#saveFeeling").click(function(event) {
                    url: "addfeel.php",
                    type: "POST",
                    data: formData,
-                   success: function(data)
-                   {
+                   success: function(data) {
                       if (data == "good") {
                         $("#sucsubtext").html("Status update added")
                         $('#myModal').modal();
@@ -967,8 +889,7 @@ $("#saveTWG").click(function(event) {
                    url: "addTWG.php",
                    type: "POST",
                    data: formData,
-                   success: function(data)
-                   {
+                   success: function(data) {
                       if (data == "good") {
                         $("#sucsubtext").html("TWG added")
                         $('#myModal').modal();
@@ -982,7 +903,6 @@ $("#saveTWG").click(function(event) {
                    }
                 });//endAjax
 });
-      
   time1 = "";
   time2 = "";
   $('#selectampm1 li').on('click', function(){
@@ -993,11 +913,9 @@ $("#saveTWG").click(function(event) {
       time2 = $(this).text();
       $('#ampm2').html(time2 + ' <span class="caret"></span>');
   });
-
   $("#addrover").click(function(event) {
     event.preventDefault();
     event.stopImmediatePropagation();
-    
     errors = 0;
     errorlist = "";
     if ($('input[name=startdate]').val() == "") {
@@ -1037,8 +955,7 @@ $("#saveTWG").click(function(event) {
                        url: "addrover.php",
                        type: "POST",
                        data: formData,
-                       success: function(data)
-                       {
+                       success: function(data) {
                           if (data == "good") {
                             $("#sucsubtext").html("Rover record added")
                             $('#myModal').modal();
@@ -1049,7 +966,7 @@ $("#saveTWG").click(function(event) {
                             $('#event').get(0).selectedIndex = 0;
                             var table = $('#viewdata').DataTable();
                             table.ajax.reload();
-                          } else {
+                        } else {
                             alert(data);
                           }
                        }
@@ -1057,10 +974,7 @@ $("#saveTWG").click(function(event) {
       } else {
         alert(errorlist);
       }
-
-
     });
-
   $('#subsector').tagit({
         readOnly: true,
         onTagClicked: function(evt, ui) {
@@ -1081,8 +995,7 @@ $("#saveTWG").click(function(event) {
                    url: "delrecord.php",
                    type: "POST",
                    data: formData,
-                   success: function(data)
-                   {
+                   success: function(data) {
                       if (data == "good") {
                         alert("Success!");
                         location.href = "index.php";
@@ -1102,15 +1015,14 @@ $("#saveTWG").click(function(event) {
            url: "levelup.php",
            type: "POST",
            data: formData,
-           success: function(data)
-           {
+           success: function(data) {
               if (data == "good") {
                 $("#sucsubtext").html("User level increased")
                 $('#myModal').modal();
                 $('#myModal').on('hidden.bs.modal', function () {
                     location.reload();
                 })
-              } else {
+            } else {
                 alert(data);
               }
            }
@@ -1125,8 +1037,7 @@ $("#saveTWG").click(function(event) {
            url: "resetpass.php",
            type: "POST",
            data: formData,
-           success: function(data)
-           {
+           success: function(data) {
               if (data == "good") {
                 $("#sucsubtext").html("Password reset")
                         $('#myModal').modal();
@@ -1139,7 +1050,6 @@ $("#saveTWG").click(function(event) {
            }
         });//endAjax
   });
-
   $("#resendconfirm").click(function(event) {
         var formData = {
           'id'        : "<?php echo $_GET['id']; ?>"
@@ -1148,8 +1058,7 @@ $("#saveTWG").click(function(event) {
            url: "resend.php",
            type: "POST",
            data: formData,
-           success: function(data)
-           {
+           success: function(data) {
               if (data == "good") {
                 $("#sucsubtext").html("Confirmation email resent")
                 $('#myModal').modal();
@@ -1169,8 +1078,7 @@ $("#saveTWG").click(function(event) {
            url: "reqTWG.php",
            type: "POST",
            data: formData,
-           success: function(data)
-           {
+           success: function(data) {
               if (data == "good") {
                 $("#sucsubtext").html("TWG change request sent")
                         $('#myModal').modal();
@@ -1191,7 +1099,6 @@ $("#profileBtn").click(function(event) {
      file1 = $('#userfile').prop('files')[0];
      fd.append('action', 'uploadpics');
      fd.append('file', file1);
-
      $.ajax({
                 url: 'uploadprofilepic.php',
                 dataType: 'text',
@@ -1268,8 +1175,7 @@ $("#profileBtnRe").click(function(event) {
                    url: "addwallpost.php",
                    type: "POST",
                    data: formData,
-                   success: function(data)
-                   {
+                   success: function(data) {
                       if (data == "good") {
                         $("#comment").val("");
                         location.reload();
@@ -1298,8 +1204,7 @@ if ($("#comment").val() == "") {
                    url: "addwallpost.php",
                    type: "POST",
                    data: formData,
-                   success: function(data)
-                   {
+                   success: function(data) {
                       if (data == "good") {
                         $("#comment").val("");
                         location.reload();
@@ -1312,16 +1217,13 @@ if ($("#comment").val() == "") {
                 });
                 //endAjax
 }); //endpost
-
   $("#sendfeedback").click(function(event) {
       sendFeedback("viewdata_user",$('textarea[name=feedback]').val(),"<?php echo $_SESSION['id']; ?>");
   });
     var heights = $(".wellz").map(function() {
         return $(this).height();
     }).get(),
-
     maxHeight = Math.max.apply(null, heights);
-
     $(".wellz").height(maxHeight);
     var picker2 = new Pikaday({ 
       field: $('#startdate')[0], 
@@ -1357,7 +1259,6 @@ $row = $stmt->fetch();
 ?>
 <script>
 $(function () {
-
     $(document).ready(function () {
       var colors = Highcharts.getOptions().colors,
         logincount = '<?php echo $row["logincount"]; ?>',
@@ -1440,8 +1341,6 @@ $(function () {
         });
     });
 });
-
-
 function editwp(row1) {
         var formData = { 'editid' : row1 };
         $.ajax({
@@ -1461,14 +1360,12 @@ function delwp(row){
     var formData = {
       'action'        : "delwp",
       'wpid'       : row
-     
-    };
+   };
                 $.ajax({
                    url: "fileFunctions.php",
                    type: "POST",
                    data: formData,
-                   success: function(data)
-                   {
+                   success: function(data) {
                       if (data == "deleted") {
                         alert("Success!");
                         location.href = "user.php?id=<?php echo $_GET['id']; ?>";
@@ -1482,10 +1379,6 @@ function delwp(row){
   }
  //endpost
 }
-
-
 </script>
-
-
 </body>
 </html>
