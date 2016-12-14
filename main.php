@@ -394,7 +394,7 @@ h3 {
           
      <?php 
 
-
+try {
 
      $stmt=$db->prepare("SELECT bz.pagename,h2.firstname,h2.lastname,bz.added,hp1.name,h2.id,h2.sex FROM bytez as bz LEFT JOIN hr_db as h2 ON h2.id=bz.hrdbid LEFT JOIN hr_profilepics as hp1 on h2.id=hp1.hrdbid ORDER BY bz.added DESC LIMIT 2 ");
             $stmt->execute();
@@ -404,13 +404,15 @@ h3 {
               if($rowsb[4]=="") {
                         if($rowsb[6]==0) {
                             if($rowsb[0]=="upload") { 
-                              echo '<div class="row"><div class="col-md-3"><a href="../hr/user.php?id='.$rowsb[5].'"><img src="../imgs/partner.png" width="50" height="50" style="border-radius:50%"></div><div class="col-md-9"><b>'.$rowsb[1].' '.$rowsb[2].'</b></a>&nbsp;'.$rowsb[0].'ed a file in E-Library<br><span style="color:#999;font-size:9px">'.date("M j - h:i a",strtotime($rowsb[3])).'</span></div></div><hr>';
-                            }elseif($rowsb[0]=="uploadpic"){
+                                  echo '<div class="row"><div class="col-md-3"><a href="../hr/user.php?id='.$rowsb[5].'"><img src="../imgs/partner.png" width="50" height="50" style="border-radius:50%"></div><div class="col-md-9"><b>'.$rowsb[1].' '.$rowsb[2].'</b></a>&nbsp;'.$rowsb[0].'ed a file in E-Library<br><span style="color:#999;font-size:9px">'.date("M j - h:i a",strtotime($rowsb[3])).'</span></div></div><hr>';
+                            }elseif($rowsb[0]=="uploadpic") {
                                   echo '<div class="row"><div class="col-md-3"><a href="../hr/user.php?id='.$rowsb[5].'"><img src="../imgs/partner.png" width="50" height="50" style="border-radius:50%"></div><div class="col-md-9"><b>'.$rowsb[1].' '.$rowsb[2].'</b></a>&nbsp;Uploaded his new profile photo.<br><span style="color:#999;font-size:9px">'.date("M j - h:i a",strtotime($rowsb[3])).'</span></div></div><hr>';
-                            }elseif($rowsb[0]=="reuploadpic"){
+                            }elseif($rowsb[0]=="reuploadpic") {
                                   echo '<div class="row"><div class="col-md-3"><a href="../hr/user.php?id='.$rowsb[5].'"><img src="../imgs/partner.png" width="50" height="50" style="border-radius:50%"></div><div class="col-md-9"><b>'.$rowsb[1].' '.$rowsb[2].'</b></a>&nbsp;Updated his profile picture.<br><span style="color:#999;font-size:9px">'.date("M j - h:i a",strtotime($rowsb[3])).'</span></div></div><hr>';
                             }elseif($rowsb[0]=="deleted"){
                                   echo '<div class="row"><div class="col-md-3"><a href="../hr/user.php?id='.$rowsb[5].'"><img src="../imgs/partner.png" width="50" height="50" style="border-radius:50%"></div><div class="col-md-9"><b>'.$rowsb[1].' '.$rowsb[2].'</b></a>&nbsp;Deleted a file in E-Library<br><span style="color:#999;font-size:9px">'.date("M j - h:i a",strtotime($rowsb[3])).'</span></div></div><hr>';
+                            }elseif($rowsb[0]=='hb_partner_adds') {  
+                                  echo '<div class="row"><div class="col-md-3"><a href="../hr/user.php?id='.$rowsb[5].'"><img src="../imgs/partner.png" width="50" height="50" style="border-radius:50%"></div><div class="col-md-9"><b>'.$rowsb[1].' '.$rowsb[2].'</b></a>&nbsp;Added a partner.<br><span style="color:#999;font-size:9px">'.date("M j - h:i a",strtotime($rowsb[3])).'</span></div></div><hr>';
                             }
                         }else {
                             if($rowsb[0]=="upload") { 
@@ -421,6 +423,8 @@ h3 {
                                   echo '<div class="row"><div class="col-md-3"><a href="../hr/user.php?id='.$rowsb[5].'"><img src="../imgs/female.png" width="50" height="50" style="border-radius:50%"></div><div class="col-md-9"><b>'.$rowsb[1].' '.$rowsb[2].'</b></a>&nbsp;Updated her profile picture.<br><span style="color:#999;font-size:9px">'.date("M j - h:i a",strtotime($rowsb[3])).'</span></div></div><hr>';
                             }elseif($rowsb[0]=="deleted"){
                                   echo '<div class="row"><div class="col-md-3"><a href="../hr/user.php?id='.$rowsb[5].'"><img src="../imgs/female.png" width="50" height="50" style="border-radius:50%"></div><div class="col-md-9"><b>'.$rowsb[1].' '.$rowsb[2].'</b></a>&nbsp;Deleted a file in E-Library<br><span style="color:#999;font-size:9px">'.date("M j - h:i a",strtotime($rowsb[3])).'</span></div></div><hr>';
+                            }elseif($rowsb[0]=="hb_partner_adds"){
+                                  echo '<div class="row"><div class="col-md-3"><a href="../hr/user.php?id='.$rowsb[5].'"><img src="../imgs/female.png" width="50" height="50" style="border-radius:50%"></div><div class="col-md-9"><b>'.$rowsb[1].' '.$rowsb[2].'</b></a>&nbsp;Added a partner<br><span style="color:#999;font-size:9px">'.date("M j - h:i a",strtotime($rowsb[3])).'</span></div></div><hr>';
                             }
                         }
 
@@ -435,6 +439,8 @@ h3 {
                                   echo '<div class="row"><div class="col-md-3"><a href="../hr/user.php?id='.$rowsb[5].'"><img src="../docs/profilepics/'.$rowsb[4].'" width="50" height="50" style="border-radius:50%"></div><div class="col-md-9"><b>'.$rowsb[1].' '.$rowsb[2].'</b></a>&nbsp;Updated his profile picture.<br><span style="color:#999;font-size:9px">'.date("M j - h:i a",strtotime($rowsb[3])).'</span></div></div><hr>';
                         }elseif($rowsb[0]=="deleted"){
                                   echo '<div class="row"><div class="col-md-3"><a href="../hr/user.php?id='.$rowsb[5].'"><img src="../docs/profilepics/'.$rowsb[4].'" width="50" height="50" style="border-radius:50%"></div><div class="col-md-9"><b>'.$rowsb[1].' '.$rowsb[2].'</b></a>&nbsp;Deleted a file in E-Library<br><span style="color:#999;font-size:9px">'.date("M j - h:i a",strtotime($rowsb[3])).'</span></div></div><hr>';
+                            }elseif($rowsb[0]=="hb_partner_adds"){
+                                  echo '<div class="row"><div class="col-md-3"><a href="../hr/user.php?id='.$rowsb[5].'"><img src="../docs/profilepics/'.$rowsb[4].'" width="50" height="50" style="border-radius:50%"></div><div class="col-md-9"><b>'.$rowsb[1].' '.$rowsb[2].'</b></a>&nbsp;Added a partner.<br><span style="color:#999;font-size:9px">'.date("M j - h:i a",strtotime($rowsb[3])).'</span></div></div><hr>';
                             }
                     }
                     else{
@@ -446,14 +452,18 @@ h3 {
                                   echo '<div class="row"><div class="col-md-3"><a href="../hr/user.php?id='.$rowsb[5].'"><img src="../docs/profilepics/'.$rowsb[4].'" width="50" height="50" style="border-radius:50%"></div><div class="col-md-9"><b>'.$rowsb[1].' '.$rowsb[2].'</b></a>&nbsp;Updated her profile picture.<br><span style="color:#999;font-size:9px">'.date("M j - h:i a",strtotime($rowsb[3])).'</span></div></div><hr>';
                         }elseif($rowsb[0]=="deleted"){
                                   echo '<div class="row"><div class="col-md-3"><a href="../hr/user.php?id='.$rowsb[5].'"><img src="../docs/profilepics/'.$rowsb[4].'" width="50" height="50" style="border-radius:50%"></div><div class="col-md-9"><b>'.$rowsb[1].' '.$rowsb[2].'</b></a>&nbsp;Deleted a file in E-Library<br><span style="color:#999;font-size:9px">'.date("M j - h:i a",strtotime($rowsb[3])).'</span></div></div><hr>';
-                            }
+                        }elseif($rowsb[0]=="hb_partner_adds"){
+                                  echo '<div class="row"><div class="col-md-3"><a href="../hr/user.php?id='.$rowsb[5].'"><img src="../docs/profilepics/'.$rowsb[4].'" width="50" height="50" style="border-radius:50%"></div><div class="col-md-9"><b>'.$rowsb[1].' '.$rowsb[2].'</b></a>&nbsp;Added a partner.<br><span style="color:#999;font-size:9px">'.date("M j - h:i a",strtotime($rowsb[3])).'</span></div></div><hr>';
+                        }
                     }
               }        
          }
 
+}catch(PDOException $e) {
+ echo "Error: " . $e->getMessage();
+}
 
-
-
+try {
     $stmt=$db->prepare("SELECT w.wall_msg,h.firstname,h.sex,w.wallposted,p.name,h.lastname,h.id,w.wallowner,h1.firstname,h1.lastname,w.wallposter FROM hr_wallposts as w LEFT JOIN hr_db as h on w.wallposter=h.id LEFT JOIN hr_profilepics as p on p.hrdbid=h.id LEFT JOIN hr_db as h1 on h1.id=w.wallowner ORDER BY w.wallpostid DESC LIMIT 3");
     $stmt->execute();
     while($rowWP=$stmt->fetch(PDO::FETCH_NUM,pdo::FETCH_ORI_NEXT)) { 
@@ -488,7 +498,9 @@ h3 {
     }
 
     }
-
+}catch(PDOException $e) {
+ echo "Error: " . $e->getMessage();
+}
        
 
     ?>
