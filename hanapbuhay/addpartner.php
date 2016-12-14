@@ -150,7 +150,7 @@ date_default_timezone_set('Asia/Brunei');
             ':region' => $_POST['region'], 
             ':province' => $_POST['province'], 
             ':municipality' => $_POST['municipality'],
-            ':created' => date("Y-m-d h:i:sa"),
+            ':created' => date("Y-m-d H:i:sa"),
             ':createdby' => $_SESSION['id'], 
             ':engagement_means' => $_POST['engagemeans'], 
             ':engagement_cost' => $_POST['engagecost'],
