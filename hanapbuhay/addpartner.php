@@ -169,7 +169,9 @@ date_default_timezone_set('Asia/Brunei');
         { 
             die("Failed to run queryyy: " . $ex->getMessage()); 
         }
-          byteMe($_SESSION['id'],'hb_partner_adds',1);
+
+
+        byteMe($_SESSION['id'],'hb_partner_adds',1);
         $refid = $db->lastInsertId();
         $postregion = explode(',', $_POST['regionarray']);
 
@@ -196,8 +198,6 @@ date_default_timezone_set('Asia/Brunei');
             }
             $stmt->execute();
         }
-
-        byteMe($_SESSION['id'],'hb_partner_adds',1);
   echo "loginok";      
 }//end post
      
