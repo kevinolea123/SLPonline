@@ -4,7 +4,7 @@ if (isset($_POST['resendid'])) {
   $_SESSION['resendid'] = $_POST['resendid'];
   die("visitpage");
 }
-        $stmt = $db->prepare("SELECT * FROM DOCDB WHERE id=:id ");
+        $stmt = $db->prepare("SELECT * FROM doc_db WHERE id=:id ");
         $stmt->bindParam(':id', $_SESSION['resendid']);
         $stmt->execute();
         $rowe = $stmt->fetch();

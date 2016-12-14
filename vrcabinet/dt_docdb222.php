@@ -61,7 +61,7 @@
 				}
 			}
 			// SQL queries get data to display
-			$sQuery = "SELECT m.id, m.doctype, m.title, n.firstname, n.region, m.filesize, m.filename, m.added, m.hrdbid, m.admindoctype, m.logtype, m.referenceno, m.sourceoffice, m.sourcename, m.destoffice, m.destname, m.datereceived FROM DOCDB m LEFT JOIN hr_db n ON m.hrdbid=n.id";
+			$sQuery = "SELECT m.id, m.doctype, m.title, n.firstname, n.region, m.filesize, m.filename, m.added, m.hrdbid, m.admindoctype, m.logtype, m.referenceno, m.sourceoffice, m.sourcename, m.destoffice, m.destname, m.datereceived FROM doc_db m LEFT JOIN hr_db n ON m.hrdbid=n.id";
 			$statement = $this->_db->prepare($sQuery);
 			// Bind parameters
 			if ( isset($_GET['sSearch']) && $_GET['sSearch'] != "" ) {
@@ -107,7 +107,7 @@
 	// Create instance of TableData class
 	$table_data = new TableData();
 	// Get the data
-	$table_data->get('DOCDB', 'id', array('id','title', 'doctype', 'firstname', 'added', 'filesize', 'region', 'filesize', 'filename','id','hrdbid','admindoctype','logtype','referenceno','sourceoffice','sourcename','destoffice','destname','datereceived'));
+	$table_data->get('doc_db', 'id', array('id','title', 'doctype', 'firstname', 'added', 'filesize', 'region', 'filesize', 'filename','id','hrdbid','admindoctype','logtype','referenceno','sourceoffice','sourcename','destoffice','destname','datereceived'));
 	/*
 	 * Alternatively, you may want to use the same class for several differnt tables for different pages.
 	 * By adding something similar to the following to your .htaccess file you can control this a little more...

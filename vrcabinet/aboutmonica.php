@@ -7,7 +7,7 @@
     }
     if (isset($_GET['id'])) {
       $_GET  = filter_input_array(INPUT_GET, FILTER_SANITIZE_NUMBER_INT);
-      $stmt = $db->prepare("SELECT m.remarks, m.doctype, m.added, m.title, m.filesize, m.filename, n.firstname, n.id as hrid, m.author FROM DOCDB m LEFT JOIN hr_db n ON m.hrdbid=n.id WHERE m.id = :id");
+      $stmt = $db->prepare("SELECT m.remarks, m.doctype, m.added, m.title, m.filesize, m.filename, n.firstname, n.id as hrid, m.author FROM doc_db m LEFT JOIN hr_db n ON m.hrdbid=n.id WHERE m.id = :id");
       $stmt->bindParam(':id', $_GET['id']);
       $stmt->execute();
       $rowdv = $stmt->fetch();

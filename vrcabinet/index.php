@@ -1,7 +1,7 @@
 <?php 
     require "../zxcd9.php";
     byteMe($_SESSION['id'],'vc_search',0.10);
-    $stmt = $db->prepare("SELECT doctype, COUNT(id) as total FROM `DOCDB` GROUP BY doctype");
+    $stmt = $db->prepare("SELECT doctype, COUNT(id) as total FROM `doc_db` GROUP BY doctype");
     $stmt->execute();
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         switch($row['doctype']) {

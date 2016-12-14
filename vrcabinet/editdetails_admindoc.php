@@ -5,7 +5,7 @@
       $_SESSION['editid'] = $_POST['editid'];
       die("visitpage");
     }
-            $stmt = $db->prepare("SELECT * FROM DOCDB WHERE id=:id ");
+            $stmt = $db->prepare("SELECT * FROM doc_db WHERE id=:id ");
             $stmt->bindParam(':id', $_SESSION['editid']);
             $stmt->execute();
             $rowadmin = $stmt->fetch();

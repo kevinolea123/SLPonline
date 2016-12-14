@@ -4,7 +4,7 @@
       $_SESSION['editid'] = $_POST['editid'];
       die("visitpage");
     }
-            $stmt = $db->prepare("SELECT * FROM docdb_comments WHERE id=:id ");
+            $stmt = $db->prepare("SELECT * FROM doc_comments WHERE id=:id ");
             $stmt->bindParam(':id', $_SESSION['editid']);
             $stmt->execute();
             $rowe = $stmt->fetch();

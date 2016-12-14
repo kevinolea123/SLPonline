@@ -203,7 +203,7 @@
         }
         if($_POST['action'] == "updatecomm") {
           $dt=date("Y-m-d");
-            $stmt = $db->prepare("UPDATE docdb_comments SET doc_comment=:dcom, added=:added, hrdbid=:hrdbid1 WHERE id=:id");
+            $stmt = $db->prepare("UPDATE doc_comments SET doc_comment=:dcom, added=:added, hrdbid=:hrdbid1 WHERE id=:id");
             $stmt->bindParam(':id', $_POST['docdbid']);
             $stmt->bindParam(':dcom', $_POST['dcom']);
             $stmt->bindParam(':added', $dt);
@@ -212,14 +212,14 @@
             echo "edited";
         }
         if($_POST['action'] == "deletecomm") {
-            $stmt = $db->prepare("DELETE FROM docdb_comments WHERE id=:id ");
+            $stmt = $db->prepare("DELETE FROM doc_comments WHERE id=:id ");
             $stmt->bindParam(':id', $_POST['docdbid']);
             $stmt->execute();
             echo "deleted";
         }
          if($_POST['action'] == "comment") {
             $id = test_input($_POST['id']);
-            $stmt = $db->prepare("INSERT INTO docdb_comments (docdbid,doc_comment,added,hrdbid) VALUES (:docdbid,:doc_comment,:added,:hrdbid)");
+            $stmt = $db->prepare("INSERT INTO doc_comments (docdbid,doc_comment,added,hrdbid) VALUES (:docdbid,:doc_comment,:added,:hrdbid)");
             $stmt->bindParam(':docdbid', $_POST['docdbid']);
             $stmt->bindParam(':doc_comment', $_POST['comment']);
             $stmt->bindParam(':added', date("Y-m-d h:i:sa",time() + 72000));
@@ -234,7 +234,7 @@
             $title = test_input($_POST['docsubject']);
             $ddate = test_input($_POST['docdate']);
             $remarks = test_input($_POST['remarks']);
-            $stmt = $db->prepare("UPDATE DOCDB SET doctype=:doctype, title=:title, docdate=:docdate, remarks=:remarks WHERE id=:id");
+            $stmt = $db->prepare("UPDATE doc_db SET doctype=:doctype, title=:title, docdate=:docdate, remarks=:remarks WHERE id=:id");
             $stmt->bindParam(':id', $id);
             $stmt->bindParam(':doctype', $doctype);
             $stmt->bindParam(':title', $title);
@@ -247,14 +247,14 @@
             $docid = test_input($_POST['docdbid']);
             $file_name=$_POST['docfilename'];
             if ($file_name=="") {
-            $stmt = $db->prepare("DELETE FROM DOCDB WHERE id=:id ");
+            $stmt = $db->prepare("DELETE FROM doc_db WHERE id=:id ");
             $stmt->bindParam(':id', $docid);
             $stmt->execute();
             $stmt = $db->prepare("DELETE FROM notifications WHERE docdbid=:id");
             $stmt->bindParam(':id', $docid);
             $stmt->execute();
            }else {
-            $stmt = $db->prepare("DELETE FROM DOCDB WHERE id=:id ");
+            $stmt = $db->prepare("DELETE FROM doc_db WHERE id=:id ");
             $stmt->bindParam(':id', $docid);
             $stmt->execute();
             $stmt = $db->prepare("DELETE FROM notifications WHERE docdbid=:id");
@@ -287,7 +287,7 @@
                 $uploadfile = $uploaddir.$uploadname;
                 if(move_uploaded_file($_FILES['file']['tmp_name'], $uploadfile)) {
                     try {
-                        $stmt = $db->prepare("UPDATE DOCDB SET filename=:filename, filesize=:filesize WHERE id=:id");
+                        $stmt = $db->prepare("UPDATE doc_db SET filename=:filename, filesize=:filesize WHERE id=:id");
                         $stmt->bindParam(':id', $_POST["docdbid"]);
                         $stmt->bindParam(':filename', $uploadname);
                         $stmt->bindParam(':filesize', $file_size);
@@ -310,7 +310,7 @@
         if($_POST['action'] == "countDL") {
             $docdbidz = test_input($_POST["docdbid"]);  
                 try {
-                        $stmt = $db->prepare("UPDATE DOCDB SET downloads=downloads+1 WHERE id=:id");
+                        $stmt = $db->prepare("UPDATE doc_db SET downloads=downloads+1 WHERE id=:id");
                         $stmt->bindParam(':id', $docdbidz);
                         $stmt->execute();
                     } catch(PDOException $e) {
@@ -339,7 +339,7 @@
                                 $doctype = $_POST['doctype'];
                          if ($file_name=="") { // filename is empty 
                                 try{
-                             $stmt = $db->prepare("INSERT IGNORE INTO DOCDB (doctype,title,author,remarks,added,hrdbid,admindoctype,logtype,referenceno,sourceoffice,sourcename,sourcepos,destoffice,destname,destpos,datereceived,docdate) VALUES (:doctype,:title,:author,:remarks,:added,:hrdbid,:admintype,:logtype,:refnumber,:sourceoffice,:sourcename,:sourcepos,:destoffice,:destname,:destpos,:resdate,:docdate)");
+                             $stmt = $db->prepare("INSERT IGNORE INTO doc_db (doctype,title,author,remarks,added,hrdbid,admindoctype,logtype,referenceno,sourceoffice,sourcename,sourcepos,destoffice,destname,destpos,datereceived,docdate) VALUES (:doctype,:title,:author,:remarks,:added,:hrdbid,:admintype,:logtype,:refnumber,:sourceoffice,:sourcename,:sourcepos,:destoffice,:destname,:destpos,:resdate,:docdate)");
                                         $stmt->bindParam(':doctype', $doctype);
                                         $stmt->bindParam(':title', $_POST['docsubject']);
                                         $stmt->bindParam(':author', $_POST['author']);
@@ -380,7 +380,7 @@
                                    $doctype = $_POST['doctype'];                      
                                 if(move_uploaded_file($_FILES['file']['tmp_name'], $uploadfile)) {                                
                                     try {
-                                        $stmt = $db->prepare("INSERT IGNORE INTO DOCDB (doctype,title,author,filename,filesize,remarks,added,hrdbid,admindoctype,logtype,referenceno,sourceoffice,sourcename,sourcepos,destoffice,destname,destpos,datereceived,docdate) VALUES (:doctype,:title,:author,:filename,:filesize,:remarks,:added,:hrdbid,:admintype,:logtype,:refnumber,:sourceoffice,:sourcename,:sourcepos,:destoffice,:destname,:destpos,:resdate,:docdate)");
+                                        $stmt = $db->prepare("INSERT IGNORE INTO doc_db (doctype,title,author,filename,filesize,remarks,added,hrdbid,admindoctype,logtype,referenceno,sourceoffice,sourcename,sourcepos,destoffice,destname,destpos,datereceived,docdate) VALUES (:doctype,:title,:author,:filename,:filesize,:remarks,:added,:hrdbid,:admintype,:logtype,:refnumber,:sourceoffice,:sourcename,:sourcepos,:destoffice,:destname,:destpos,:resdate,:docdate)");
                                         $stmt->bindParam(':doctype', $doctype);
                                         $stmt->bindParam(':title', $_POST['docsubject']);
                                         $stmt->bindParam(':author', $_POST['author']);
@@ -451,7 +451,7 @@
                                    $doctype = $_POST['doctype'];
                                 if(move_uploaded_file($_FILES['file']['tmp_name'], $uploadfile)) {   
                                     try {
-                                        $stmt = $db->prepare("INSERT IGNORE INTO DOCDB (doctype,title,author,filename,filesize,remarks,added,hrdbid,admindoctype,logtype,referenceno,sourceoffice,sourcename,sourcepos,destoffice,destname,destpos,datereceived,docdate) VALUES (:doctype,:title,:author,:filename,:filesize,:remarks,:added,:hrdbid,:admintype,:logtype,:refnumber,:sourceoffice,:sourcename,:sourcepos,:destoffice,:destname,:destpos,:resdate,:docdate)");
+                                        $stmt = $db->prepare("INSERT IGNORE INTO doc_db (doctype,title,author,filename,filesize,remarks,added,hrdbid,admindoctype,logtype,referenceno,sourceoffice,sourcename,sourcepos,destoffice,destname,destpos,datereceived,docdate) VALUES (:doctype,:title,:author,:filename,:filesize,:remarks,:added,:hrdbid,:admintype,:logtype,:refnumber,:sourceoffice,:sourcename,:sourcepos,:destoffice,:destname,:destpos,:resdate,:docdate)");
                                             $stmt->bindParam(':doctype', $doctype);
                                             $stmt->bindParam(':title', $_POST['docsubject']);
                                             $stmt->bindParam(':author', $_POST['author']);
@@ -513,7 +513,7 @@
                 $dateondoc3  = "$parts[2]-$parts[0]-$parts[1]";
                   if($_POST['admintype1']=="" && $_POST['logtype1']=="") {
                     try {   
-                        $stmt = $db->prepare("UPDATE DOCDB SET doctype=:doctype, title=:title, author=:author, remarks=:remarks, added=:added, hrdbid=:hrdbid, sourceoffice=:sourceoffice,sourcename=:sourcename,sourcepos=:sourcepos,destoffice=:destoffice, destname=:destname,destpos=:destpos,datereceived=:resdate3,docdate=:dateondoc3,lastedited=:lastedited WHERE id=:id"); 
+                        $stmt = $db->prepare("UPDATE doc_db SET doctype=:doctype, title=:title, author=:author, remarks=:remarks, added=:added, hrdbid=:hrdbid, sourceoffice=:sourceoffice,sourcename=:sourcename,sourcepos=:sourcepos,destoffice=:destoffice, destname=:destname,destpos=:destpos,datereceived=:resdate3,docdate=:dateondoc3,lastedited=:lastedited WHERE id=:id"); 
                         $stmt->bindParam(':id', $_SESSION['editid']);
                         $stmt->bindParam(':doctype', $_POST['doctype']);
                         $stmt->bindParam(':title', $_POST['docsubject']);
@@ -539,7 +539,7 @@
                     }
                   }else{
                     try {   
-                        $stmt = $db->prepare("UPDATE DOCDB SET doctype=:doctype, title=:title, author=:author, remarks=:remarks, added=:added, hrdbid=:hrdbid,admindoctype=:admintype,logtype=:logtype,referenceno=:refnumber, sourceoffice=:sourceoffice,sourcename=:sourcename,sourcepos=:sourcepos,destoffice=:destoffice, destname=:destname,destpos=:destpos,datereceived=:resdate3,docdate=:dateondoc3,lastedited=:lastedited WHERE id=:id"); 
+                        $stmt = $db->prepare("UPDATE doc_db SET doctype=:doctype, title=:title, author=:author, remarks=:remarks, added=:added, hrdbid=:hrdbid,admindoctype=:admintype,logtype=:logtype,referenceno=:refnumber, sourceoffice=:sourceoffice,sourcename=:sourcename,sourcepos=:sourcepos,destoffice=:destoffice, destname=:destname,destpos=:destpos,datereceived=:resdate3,docdate=:dateondoc3,lastedited=:lastedited WHERE id=:id"); 
                         $stmt->bindParam(':id', $_SESSION['editid']);
                         $stmt->bindParam(':doctype', $_POST['doctype']);
                         $stmt->bindParam(':title', $_POST['docsubject']);
@@ -598,7 +598,7 @@
                 $uploadfile = $uploaddir.$uploadname;
                       if($filename!="") {
                          try{
-                           $edit = $db->prepare("SELECT filename from DOCDB where id=:idoc");
+                           $edit = $db->prepare("SELECT filename from doc_db where id=:idoc");
                             $edit->bindParam(':idoc',$_SESSION['editid']);
                             $edit->execute();
                                $edit_row = $edit->fetch(PDO::FETCH_ASSOC);
@@ -614,7 +614,7 @@
                             if(is_uploaded_file($_FILES['file']['tmp_name'])) {
                                 try {
                                     move_uploaded_file($_FILES['file']['tmp_name'], $uploadfile);
-                                    $stmt = $db->prepare("UPDATE DOCDB SET doctype=:doctype, title=:title, author=:author, filename=:filename, filesize=:filesize, remarks=:remarks, added=:added, hrdbid=:hrdbid, admindoctype=:admintype, logtype=:logtype,referenceno=:refnumber,sourceoffice=:sourceoffice,sourcename=:sourcename,sourcepos=:sourcepos,destoffice=:destoffice, destname=:destname,destpos=:destpos,datereceived=:resdate2,docdate=:dateondoc2,lastedited=:lastedited WHERE id=:id"); 
+                                    $stmt = $db->prepare("UPDATE doc_db SET doctype=:doctype, title=:title, author=:author, filename=:filename, filesize=:filesize, remarks=:remarks, added=:added, hrdbid=:hrdbid, admindoctype=:admintype, logtype=:logtype,referenceno=:refnumber,sourceoffice=:sourceoffice,sourcename=:sourcename,sourcepos=:sourcepos,destoffice=:destoffice, destname=:destname,destpos=:destpos,datereceived=:resdate2,docdate=:dateondoc2,lastedited=:lastedited WHERE id=:id"); 
                                     $stmt->bindParam(':id', $_SESSION['editid']);
                                     $stmt->bindParam(':doctype', $_POST['doctype']);
                                     $stmt->bindParam(':title', $_POST['docsubject']);
