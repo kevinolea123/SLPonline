@@ -31,7 +31,7 @@ if(!empty($_POST))
             $uploadfile = $uploaddir.$uploadname;
             if(move_uploaded_file($_FILES['file']['tmp_name'], $uploaddir."/".$uploadname )) {
             try { 
-                      byteMe($_SESSION['id'],'profilepic',15);
+                      byteMe($_SESSION['id'],'uploadpic',15);
                       $stmt = $db->prepare("INSERT INTO hr_profilepics(hrdbid, name, filename ,dtetme) VALUES (:id, :file, :file1,:dt)");
                       $stmt->bindParam(':id',$_SESSION['pageid']);
                       $stmt->bindParam(':file', $uploadname);
@@ -57,7 +57,7 @@ if(!empty($_POST))
         }             
         }
     if($_POST['action'] == "reuploadpics") {
-      
+
         date_default_timezone_set('Asia/Brunei');
             $ext=date("mdY");
             $maxsize=5000000;
@@ -80,7 +80,7 @@ if(!empty($_POST))
             $uploadname2 = $ext.'_'.$_SESSION['pageid'].'.'.$file_ext;
             $uploadfile = $uploaddir.$uploadname2;
             try {
-                    byteMe($_SESSION['id'],'profilepic',3);
+                   
                     $edit = $db->prepare("SELECT name FROM hr_profilepics WHERE hrdbid=:hrdbidz");
                     $edit->bindParam(':hrdbidz',$_SESSION['pageid']);
                     $edit->execute();
@@ -91,6 +91,7 @@ if(!empty($_POST))
               } 
             if(move_uploaded_file($_FILES['file']['tmp_name'], $uploaddir."/".$uploadname2 )) {
                try {
+                      byteMe($_SESSION['id'],'uploadpic',3);
                       $stmt = $db->prepare("UPDATE hr_profilepics SET name=:file, filename=:filez1, dtetme=:dt WHERE hrdbid=:pageid");
                       $stmt->bindParam(':pageid',$_SESSION['pageid']);
                       $stmt->bindParam(':file', $uploadname2);
