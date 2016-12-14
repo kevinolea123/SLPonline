@@ -1,6 +1,6 @@
 <?php
 require "../zxcd9.php";
-$query = "SELECT m.orgname, m.address, m.psector, m.psic, m.region as regionz, m.contacttitle, m.engagement_means, m.engagement_cost, m.createdby, m.province, m.municipality, m.contactperson, m.contactemail, m.contactnumber, m.npmo, m.established, m.website, t.firstname, t.region,m.pintervention FROM PRTemployers m LEFT JOIN HRDB t ON m.createdby=t.id WHERE m.id = :id"; 
+$query = "SELECT m.orgname, m.address, m.psector, m.psic, m.region as regionz, m.contacttitle, m.engagement_means, m.engagement_cost, m.createdby, m.province, m.municipality, m.contactperson, m.contactemail, m.contactnumber, m.npmo, m.established, m.website, t.firstname, t.region,m.pintervention FROM PRTemployers m LEFT JOIN hr_db t ON m.createdby=t.id WHERE m.id = :id"; 
         $query_params = array(':id' => $_GET['id']);
         try 
         { $stmt = $db->prepare($query); $result = $stmt->execute($query_params); } 
