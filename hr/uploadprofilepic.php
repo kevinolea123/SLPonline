@@ -8,6 +8,8 @@ if(!empty($_POST))
 { 
     if($_POST['action'] == "uploadpics") 
     {
+
+        date_default_timezone_set('Asia/Brunei');
             $ext=date("mdY");
             $maxsize=10000000;
             $FILE_EXTS = array('jpg','jpeg','png', 'bmp', 'JPG', 'JPEG', 'PNG', 'BMP');         
@@ -55,6 +57,8 @@ if(!empty($_POST))
         }             
         }
     if($_POST['action'] == "reuploadpics") {
+      
+        date_default_timezone_set('Asia/Brunei');
             $ext=date("mdY");
             $maxsize=5000000;
              $FILE_EXTS = array('jpg','jpeg','png', 'bmp', 'JPG', 'JPEG', 'PNG', 'BMP');          
