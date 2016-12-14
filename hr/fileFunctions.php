@@ -9,14 +9,14 @@ $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
         if ($_POST['action'] == 'approve') {
         if ($_SESSION['id']==9) {
                 $query = " 
-                    UPDATE DOCDB 
+                    UPDATE doc_db 
                     SET approved = 1 
                     WHERE 
                         id = :id
                 ";
         } else if ($_SESSION['id']==662) {
                 $query = " 
-                    UPDATE DOCDB 
+                    UPDATE doc_db 
                     SET approved = 2 
                     WHERE 
                         id = :id
@@ -37,7 +37,7 @@ $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
                 }
         }
         if ($_POST['action'] == 'delete') {
-                $query = "DELETE FROM DOCDB WHERE id = :id";
+                $query = "DELETE FROM doc_db WHERE id = :id";
                 $query_params = array( 
                     ':id' => $id 
                 ); 
@@ -66,11 +66,11 @@ $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
                 } 
             }
         if($_POST['action']=="editwp") {
-             date_default_timezone_set('Asia/Brunei');
+            date_default_timezone_set('Asia/Brunei');
             $stmt=$db->prepare("UPDATE hr_wallposts SET wall_msg=:ewp,wallposted=:wallposted,wallposter=:wallposter WHERE wallpostid=:wpid");
             $stmt->bindparam(':wpid',$_SESSION['editid']);
             $stmt->bindParam(':ewp',$_POST['ewp']);   
-            $stmt->bindParam(':wallposted', date('Y-m-d'));
+            $stmt->bindParam(':wallposted', date('Y-m-d H:i:s'));
             $stmt->bindParam(':wallposter', $_SESSION['id']);
             $stmt->execute();
             echo "edited";

@@ -49,7 +49,7 @@ function upload_dir(){
             FROM hr_rover m 
             LEFT JOIN hr_db t
             ON m.addedby = t.id
-            LEFT JOIN DOCDB z
+            LEFT JOIN doc_db z
             ON m.id=z.roverid
             WHERE 
                 m.id = :id
@@ -104,7 +104,7 @@ if( isset($_POST['submit']) ){
           $title = test_input($_POST['dsubject']);
           try {
             // prepare sql and bind parameters
-            $stmt = $db->prepare("INSERT INTO DOCDB (doctype,title,filename,filesize,remarks,added,hrdbid,roverid) 
+            $stmt = $db->prepare("INSERT INTO doc_db (doctype,title,filename,filesize,remarks,added,hrdbid,roverid) 
             VALUES (:doctype,:title,:filename,:filesize,:remarks,:added,:hrdbid,:roverid)");
             $stmt->bindParam(':doctype', $type);
             $stmt->bindParam(':title', $title);

@@ -6,7 +6,7 @@ if(!empty($_POST)) {
 $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
         $id = test_input($_POST['docid']);
         $query = " 
-            UPDATE DOCDB 
+            UPDATE doc_db 
             SET approved = 1 
             WHERE 
                 id = :id

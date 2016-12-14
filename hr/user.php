@@ -294,7 +294,7 @@ if ($_SESSION['permlvl']>0 || ($_SESSION['permlvl']<1 && $_SESSION['id']==$_SESS
           $byte->execute();
           $bytez = $byte->fetch();
     try {
-        $admin = $db->prepare("SELECT count(id) as encoded FROM DOCDB WHERE hrdbid=:hrdbida");
+        $admin = $db->prepare("SELECT count(id) as encoded FROM doc_db WHERE hrdbid=:hrdbida");
         $admin->bindParam(':hrdbida', $_SESSION['pageid']);
         $admin->execute();
         $admun=$admin->fetch();

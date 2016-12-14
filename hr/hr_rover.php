@@ -61,7 +61,7 @@ class TableData {
 			}
 		}
 		// SQL queries get data to display
-		$sQuery = "SELECT DISTINCT m.id, m.addedby, m.startdate, m.starttime, m.enddate, m.endtime, m.event, m.venue, REPLACE(m.startdate,'-','') as replacedate, m.remarks, j.id as fileatt FROM hr_rover m LEFT JOIN hr_RVtags z ON m.id=z.roverid LEFT JOIN DOCDB j ON m.id=j.roverid WHERE m.addedby = '".$_SESSION['uid']."' OR z.hrdbid = '".$_SESSION['uid']."' ORDER BY m.startdate";
+		$sQuery = "SELECT DISTINCT m.id, m.addedby, m.startdate, m.starttime, m.enddate, m.endtime, m.event, m.venue, REPLACE(m.startdate,'-','') as replacedate, m.remarks, j.id as fileatt FROM hr_rover m LEFT JOIN hr_RVtags z ON m.id=z.roverid LEFT JOIN doc_db j ON m.id=j.roverid WHERE m.addedby = '".$_SESSION['uid']."' OR z.hrdbid = '".$_SESSION['uid']."' ORDER BY m.startdate";
 		$statement = $this->_db->prepare($sQuery);
 		// Bind parameters
 		if ( isset($_GET['sSearch']) && $_GET['sSearch'] != "" ) {

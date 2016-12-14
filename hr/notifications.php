@@ -37,7 +37,7 @@ if(empty($_SESSION['emailaddress']))
             FROM hr_rover m 
             LEFT JOIN hr_db t
             ON m.addedby = t.id
-            LEFT JOIN DOCDB z
+            LEFT JOIN doc_db z
             ON m.id=z.roverid
             WHERE 
                 m.id = :id

@@ -61,7 +61,7 @@ class TableData {
 			}
 		}
 		// SQL queries get data to display
-		$sQuery = "SELECT m.id, m.filename, m.doctype, m.remarks, m.approved FROM DOCDB m LEFT JOIN hr_rover z ON m.roverid=z.id WHERE m.roverid = '".$_SESSION['uid']."'";
+		$sQuery = "SELECT m.id, m.filename, m.doctype, m.remarks, m.approved FROM doc_db m LEFT JOIN hr_rover z ON m.roverid=z.id WHERE m.roverid = '".$_SESSION['uid']."'";
 		$statement = $this->_db->prepare($sQuery);
 		// Bind parameters
 		if ( isset($_GET['sSearch']) && $_GET['sSearch'] != "" ) {
