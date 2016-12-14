@@ -1,8 +1,9 @@
 <?php
-		$username = "slpuser"; 
-		$password = "turtles9"; 
-		$host = "localhost"; 
-		$dbname = "slponline"; 
+$username = "slpuser"; 
+$password = "turtles9"; 
+$host = "localhost"; 
+$dbname = "slponline"; 
+
 $options = array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'); 
 try 
 { 
@@ -52,10 +53,13 @@ echo "Downloaded on ".date("m/d/Y H:i:s")."<br><br>";
 	} else {
 	$stmt = $db->prepare("SELECT m.orgname, m.psic, m.ptype, m.pintervention, m.region, m.province, m.municipality, m.address, m.contactperson, m.contacttitle, m.contactemail, m.contactnumber, SUM(z.numopenings), m.id FROM PRTemployers m LEFT JOIN PRTdemand z ON z.partner=m.id GROUP BY m.orgname"); 
 	}
+
 	$stmt->execute();
+
 	while ($row = $stmt->fetch(PDO::FETCH_NUM, PDO::FETCH_ORI_NEXT)) {
 	    echo '<tr><td>'.$row[0].'</td><td>'.$row[1].'</td><td>'.$row[2].'</td><td>'.$row[3].'</td><td>'.$row[4].'</td><td>'.$row[5].'</td><td>'.$row[6].'</td><td>'.$row[7].'</td><td>'.$row[8].'</td><td>'.$row[9].'</td><td>'.$row[10].'</td><td>'.$row[11].'</td><td>'.$row[12].'</td><td>http://slp.ph/hanapbuhay/partnerdetails.php?id='.$row[13].'</td></tr>';
 	}
+
 } else {
 echo "SLP ONLINE - HANAPBUHAY - JOBS (http://slp.ph)<br>";
 echo "Downloaded on ".date("m/d/Y H:i:s")."<br><br>";
@@ -95,10 +99,13 @@ echo "Downloaded on ".date("m/d/Y H:i:s")."<br><br>";
 	} else {
 	$stmt = $db->prepare("SELECT m.orgname, m.psic, m.ptype, m.pintervention, m.region, m.province, m.municipality, m.address, m.contactperson, m.contacttitle, m.contactemail, m.contactnumber, SUM(z.numopenings), m.id FROM PRTemployers m LEFT JOIN PRTdemand z ON z.partner=m.id GROUP BY m.orgname"); 
 	}
+
 	$stmt->execute();
+
 	while ($row = $stmt->fetch(PDO::FETCH_NUM, PDO::FETCH_ORI_NEXT)) {
 	      echo '<tr><td>'.$row[0].'</td><td>'.$row[1].'</td><td>'.$row[2].'</td><td>'.$row[3].'</td><td>'.$row[4].'</td><td>'.$row[5].'</td><td>'.$row[6].'</td><td>'.$row[7].'</td><td>'.$row[8].'</td><td>'.$row[9].'</td><td>'.$row[10].'</td><td>'.$row[11].'</td><td>'.$row[12].'</td><td>'.$row[13].'</td><td>'.$row[14].'</td><td>'.$row[15].'</td><td>'.$row[16].'</td><td>'.$row[17].'</td><td>'.$row[18].'</td><td>'.$row[19].'</td><td>'.$row[20].'</td><td>'.$row[21].'</td><td>'.$row[22].'</td><td>'.$row[23].'</td><td>'.$row[24].'</td></tr>';
 	}
+
 }
 echo "</table>";
 ?>

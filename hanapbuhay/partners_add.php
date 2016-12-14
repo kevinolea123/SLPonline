@@ -1,5 +1,5 @@
 <?php
-  require "../zxcd9.php";
+require "../zxcd9.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,6 +16,7 @@
     <script src="../js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../js/bootstrapValidator.js"></script>
     <style>
+
 body {
     background-color: #f7f9fb;
     background-size: cover;
@@ -31,41 +32,42 @@ body {
     right: -15px;
 }
 .slidedown {
-    -webkit-transform: scaleY(0);
-    -o-transform: scaleY(0);
-    -ms-transform: scaleY(0);
-    transform: scaleY(0);
+  -webkit-transform: scaleY(0);
+       -o-transform: scaleY(0);
+      -ms-transform: scaleY(0);
+          transform: scaleY(0);
   
-    -webkit-transform-origin: top;
-    -o-transform-origin: top;
-    -ms-transform-origin: top;
-    transform-origin: top;
+  -webkit-transform-origin: top;
+       -o-transform-origin: top;
+      -ms-transform-origin: top;
+          transform-origin: top;
   
-    -webkit-transition: -webkit-transform 0.2s ease;
-    -o-transition: -o-transform 0.2s ease;
-    -ms-transition: -ms-transform 0.2s ease;
-    transition: transform 0.2s ease;
+  -webkit-transition: -webkit-transform 0.2s ease;
+            -o-transition: -o-transform 0.2s ease;
+          -ms-transition: -ms-transform 0.2s ease;
+                  transition: transform 0.2s ease;
 }
+
 .slidedown.active {
-    -webkit-transform: scaleY(1);
-    -o-transform: scaleY(1);
-    -ms-transform: scaleY(1);
-    transform: scaleY(1);
+  -webkit-transform: scaleY(1);
+       -o-transform: scaleY(1);
+      -ms-transform: scaleY(1);
+          transform: scaleY(1);
 }
 .successcontent {
-    display:none;
+  display:none;
 }
 .mainlink {
-    font-size: 1.8em;
-    margin-top: 1px;
+  font-size: 1.8em;
+  margin-top: 1px;
 }
 .form-group div {
-    margin-bottom: 0.5em;
+  margin-bottom: 0.5em;
 }
 .disabled {
-    background:rgba(1,1,1,0.2);
-    border:0px solid;
-    cursor:progress;
+  background:rgba(1,1,1,0.2);
+  border:0px solid;
+  cursor:progress;
 }
 </style>
 </style>
@@ -74,6 +76,7 @@ body {
 <?php include '../nav.php'; ?>
 <div class="container-fluid">
     <div class="row" style="padding-top:2em;display:none" id="successcontent">
+      
     </div>
     <div style="padding-top:2em;" id="maincontent">
       <div class="row">
@@ -85,28 +88,41 @@ body {
       </div>
       <div class="col-md-offset-2 col-md-8" id="main">
         <form id="partnerForm" method="post" action="" autocomplete="off">
-            <div class="form-group">
-                  <div class="col-sm-12">
-                        <input name="orgname" class="form-control" id="orgname" placeholder="Organization / Company Name">
-                  </div>
-            </div>
-                  <div class="form-group">
-                         <div class="col-sm-12">
-                              <select class="form-control cleanselect" name="ptype" id="ptype" required>
-                                    <option value="" selected>Partner Type</option>
-                                    <option>LGU</option>
-                                    <option>NGO</option>
-                                    <option>Private</option>
-                                    <option>CSO</option>
-                                    <option>NGA</option>
-                                    <option>MFI</option>
-                              </select>
-                          </div>
-                   </div>
-                   <div class="form-group">
+                            <div class="form-group">
+                              <div class="col-sm-12">
+                                <input name="orgname" class="form-control" id="orgname" placeholder="Organization / Company Name">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                                        <div class="col-sm-6" >
+                                          <select class="form-control" name="psector" id="psector">
+                                            <option value="" selected="">-Partner Sector-</option>
+                                            <option >NGO</option>
+                                            <option >Private</option>
+                                            <option >CSO</option>
+                                            <option >NGA</option>
+                                            <option >MFI</option>
+                                          </select>
+                                        </div>
+                            </div>
+                            <div class="form-group"> 
+                            <div class="col-sm-6">
+                                        <select class="form-control" name="pintervention" id="pintervention" required>
+                                            <option value="" selected>-Intervention Type-</option>
+                                            <option >Direct Employment</option>
+                                            <option >Training Service Provider</option>
+                                            <option >Market Linkage</option>
+                                            <option >Services (Financial / Nonfinancial)</option>
+                                        </select>
+                            </div>
+                         <!--   <div class="col-sm-6" id="indirectholder" style="display:none;">
+                                    <input type="text" name="indirectpartner" id="indirectpartner" class="form-control" placeholder="Indirect Partner Name">
+                            </div> -->
+                            </div>
+                            <div class="form-group">
                                   <div class="col-sm-12">
                                         <select class="form-control cleanselect" name="psic" id="psic" required>
-                                          <option value="" selected>Primary Sector</option>
+                                          <option value="" selected>-Primary Industry-</option>
                                           <option>Agriculture Forestry and Fishery</option>
                                           <option>Automotive and Land Transportation</option>
                                           <option>Construction</option>
@@ -115,6 +131,7 @@ body {
                                           <option>Footwear and Leathergoods</option>
                                           <option>Furniture and Fixtures</option>
                                           <option>Garments</option>
+                                          <option>Government</option>
                                           <option>HHC (Human Health/Health Care)</option>
                                           <option>Heating Ventilation Airconditioning and Refrigeration</option>
                                           <option>Information and Communication Technology</option>
@@ -169,7 +186,7 @@ body {
                             <div class="form-group">
                                   <div class="col-sm-5">
                                         <select class="form-control" name="engagemeans" id="engagemeans" required>
-                                            <option value="" selected>Means of Engagement</option>
+                                            <option value="" selected>-Means of Engagement-</option>
                                             <option>Partnership Meeting</option>
                                             <option>Partnership Forum</option>
                                             <option>Job Fair</option>
@@ -259,8 +276,19 @@ body {
     </div>
     <div class="col-md-2"></div>
 </div>
+
 <script>
+/*function intervent() {
+  var intervent = $('#pintervention option:selected').val();
+  if (intervent == "Training" || intervent == "Placement") {
+      $('#indirectholder').slideDown(500);
+  }
+  if (intervent == "Direct Employment") {
+      $('#indirectholder').fadeOut(500);
+  }
+} */
 function getProv(val) {
+
   var formData = { 'region' : $('#region option:selected').val() };
   $.ajax({
   type: "POST",
@@ -274,6 +302,7 @@ function getProv(val) {
   });
 }
 function getCity(val) {
+
   var formData = { 'provi' : $('#prov option:selected').val() };
   $.ajax({
   type: "POST",
@@ -299,6 +328,7 @@ function getBrgy(val) {
 
   });
 }
+$("#loadicon").hide();
 $('#tooltip1').popover();
 prefloc = 1;
 $("#btnAddnew").click(function() {
@@ -342,6 +372,45 @@ function addForm() {
                                    '       </div>';
   document.getElementById("newinput").appendChild(newdiv);
 }
+/*$("#formsubmit").click(function() {
+  var formData = {
+          'action'             : 'addPartners',
+          'partnerid'          : '<?php echo $_GET["id"]; ?>',
+          'orgname'            : $('input[name=orgname]').val(),        
+          'psector'              : $('#psector option:selected').val(),
+          'pintervention'      : $('#pintervention option:selected').val(),
+          'psic'               : $('#psic option:selected').val(),
+          'address'            : $('input[name=address]').val(),          
+          'yearsofop'          : $('input[name=yearsofop]').val(),
+          'website'            : $('input[name=website]').val(),        
+          'contactperson'      : $('input[name=contactperson]').val(),  
+          'contacttitle'      : $('input[name=contacttitle]').val(),          
+          'contactemail'       : $('input[name=contactemail]').val(),
+          'contactnumber'      : $('input[name=contactnumber]').val(),          
+          'engagemeans'        : $('#engagemeans option:selected').val(),          
+          'engagecost'         : $('input[name=engagecost]').val(),          
+          'region'             : $('#region option:selected').text(),
+          'province'           : $('#prov option:selected').text(),
+          'municipality'       : $('#city option:selected').text()
+        };
+                $.ajax({
+                   url: "functions.php",
+                   type: "POST",
+                   data: formData,
+                   success: function(data)
+                   {
+                      if (data == "Success") {
+                        alert("Success!");
+                        window.location.href="partners_add.php"
+                        
+                      } else {
+                        alert(data);
+                      }
+
+                   }
+                });//endAjax
+});*/
+
 </script>
 <script type="text/javascript" src="../js/partnerForm.js"></script>
 </body>

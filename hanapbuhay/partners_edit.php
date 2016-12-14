@@ -1,12 +1,13 @@
 <?php
 require "../zxcd9.php";
-$query = "SELECT m.orgname, m.address, m.ptype, m.psic, m.region as regionz, m.contacttitle, m.engagement_means, m.engagement_cost, m.createdby, m.province, m.municipality, m.contactperson, m.contactemail, m.contactnumber, m.npmo, m.established, m.website, t.firstname, t.region FROM PRTemployers m LEFT JOIN hr_db t ON m.createdby=t.id WHERE m.id = :id"; 
+$query = "SELECT m.orgname, m.address, m.psector, m.psic, m.region as regionz, m.contacttitle, m.engagement_means, m.engagement_cost, m.createdby, m.province, m.municipality, m.contactperson, m.contactemail, m.contactnumber, m.npmo, m.established, m.website, t.firstname, t.region,m.pintervention FROM PRTemployers m LEFT JOIN HRDB t ON m.createdby=t.id WHERE m.id = :id"; 
         $query_params = array(':id' => $_GET['id']);
-            try 
-            { $stmt = $db->prepare($query); $result = $stmt->execute($query_params); } 
-            catch(PDOException $ex) 
-            { die("Failed to run query: " . $ex->getMessage()); } 
+        try 
+        { $stmt = $db->prepare($query); $result = $stmt->execute($query_params); } 
+        catch(PDOException $ex) 
+        { die("Failed to run query: " . $ex->getMessage()); } 
         $row = $stmt->fetch();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,6 +24,7 @@ $query = "SELECT m.orgname, m.address, m.ptype, m.psic, m.region as regionz, m.c
     <script src="../js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../js/bootstrapValidator.js"></script>
     <style>
+
 body {
     background-color: #f7f9fb;
     background-size: cover;
@@ -38,41 +40,42 @@ body {
     right: -15px;
 }
 .slidedown {
-     -webkit-transform: scaleY(0);
-     -o-transform: scaleY(0);
-     -ms-transform: scaleY(0);
-      transform: scaleY(0);
+  -webkit-transform: scaleY(0);
+       -o-transform: scaleY(0);
+      -ms-transform: scaleY(0);
+          transform: scaleY(0);
   
-     -webkit-transform-origin: top;
-     -o-transform-origin: top;
-     -ms-transform-origin: top;
-     transform-origin: top;
+  -webkit-transform-origin: top;
+       -o-transform-origin: top;
+      -ms-transform-origin: top;
+          transform-origin: top;
   
-     -webkit-transition: -webkit-transform 0.2s ease;
-     -o-transition: -o-transform 0.2s ease;
-     -ms-transition: -ms-transform 0.2s ease;
-     transition: transform 0.2s ease;
+  -webkit-transition: -webkit-transform 0.2s ease;
+            -o-transition: -o-transform 0.2s ease;
+          -ms-transition: -ms-transform 0.2s ease;
+                  transition: transform 0.2s ease;
 }
+
 .slidedown.active {
-     -webkit-transform: scaleY(1);
-     -o-transform: scaleY(1);
-     -ms-transform: scaleY(1);
-     transform: scaleY(1);
+  -webkit-transform: scaleY(1);
+       -o-transform: scaleY(1);
+      -ms-transform: scaleY(1);
+          transform: scaleY(1);
 }
 .successcontent {
-     display:none;
+  display:none;
 }
 .mainlink {
-     font-size: 1.8em;
-     margin-top: 1px;
+  font-size: 1.8em;
+  margin-top: 1px;
 }
 .form-group div {
-     margin-bottom: 0.5em;
+  margin-bottom: 0.5em;
 }
 .disabled {
-     background:rgba(1,1,1,0.2);
-     border:0px solid;
-     cursor:progress;
+  background:rgba(1,1,1,0.2);
+  border:0px solid;
+  cursor:progress;
 }
 </style>
 </style>
@@ -81,12 +84,13 @@ body {
 <?php include '../nav.php'; ?>
 <div class="container-fluid">
     <div class="row" style="padding-top:2em;display:none" id="successcontent">
+      
     </div>
     <div style="padding-top:2em;" id="maincontent">
       <div class="row">
         <div class="col-md-offset-1 col-md-10" ><center>
             <div class="col-md-12">
-              <span class="mainlink cl-effect-1"><b>Partner</b> Registration</span><br>
+              <span class="mainlink cl-effect-1"><b>Update Partner</b> Registration</span><br>
             </div>
         </div>
       </div>
@@ -98,10 +102,10 @@ body {
                               </div>
                             </div>
                             <div class="form-group">
-                                        <div class="col-sm-12">
-                                          <select class="form-control cleanselect" name="ptype" id="ptype" required>
-                                            <option value="">Partner Type</option>
-                                            <option selected><?php echo $row['ptype'];?></option>
+                                        <div class="col-sm-6">
+                                          <select class="form-control" name="psector" id="psector" required>
+                                            <option value="<?php echo $row['psector'];?>"><?php echo $row['psector'];?></option>
+                                            <option value="">-Partner Sector-</option>
                                             <option>LGU</option>
                                             <option>NGO</option>
                                             <option>Private</option>
@@ -112,10 +116,25 @@ body {
                                         </div>
                             </div>
                             <div class="form-group">
+                            <div class="col-sm-6">
+                                        <select class="form-control " name="pintervention" id="pintervention" required>                                        
+                                            <option value="<?php echo $row['pintervention'];?>" selected><?php echo $row['pintervention'];?></option>
+                                           <option value="">-Intervention Type-</option>
+                                            <option >Direct Employment</option>
+                                            <option >Training Service Provider</option>
+                                            <option >Market Linkage</option>
+                                            <option >Services (Financial / Nonfinancial)</option>
+                                        </select>
+                            </div>
+                       <!--     <div class="col-sm-6" id="indirectholder" style="display:none;">
+                                    <input type="text" name="indirectpartner" id="indirectpartner" class="form-control" placeholder="Indirect Partner Name">
+                            </div> -->
+                            </div>
+                            <div class="form-group">
                                   <div class="col-sm-12">
                                         <select class="form-control cleanselect" name="psic" id="psic" required>
-                                          <option value="">Primary Sector</option>
-                                          <option selected><?php echo $row['psic'];?></option>
+                                          <option value="<?php echo $row['psic'];?>"><?php echo $row['psic'];?></option>
+                                          <option value="">-Primary Industry-</option>
                                           <option>Agriculture Forestry and Fishery</option>
                                           <option>Automotive and Land Transportation</option>
                                           <option>Construction</option>
@@ -124,6 +143,7 @@ body {
                                           <option>Footwear and Leathergoods</option>
                                           <option>Furniture and Fixtures</option>
                                           <option>Garments</option>
+                                          <option>Government</option>
                                           <option>HHC (Human Health/Health Care)</option>
                                           <option>Heating Ventilation Airconditioning and Refrigeration</option>
                                           <option>Information and Communication Technology</option>
@@ -178,8 +198,9 @@ body {
                             <div class="form-group">
                                   <div class="col-sm-5">
                                         <select class="form-control" name="engagemeans" id="engagemeans" required>
-                                            <option value="">Means of Engagement</option>
-                                            <option selected><?php echo $row['engagement_means'];?></option>
+
+                                            <option value="<?php echo $row['engagement_means'];?>" selected><?php echo $row['engagement_means'];?></option>
+                                            <option value="">-Means of Engagement-</option>
                                             <option>Partnership Meeting</option>
                                             <option>Partnership Forum</option>
                                             <option>Job Fair</option>
@@ -193,7 +214,7 @@ body {
                             <div class="col-sm-12">
                               <select class="form-control cleanselect" id="region" name="region" onChange='getProv(this.value)' required>
                                 <option value="">Select Region</option>
-                                <option selected><?php echo $row['regionz'];?></option>
+                                <option value="<?php echo $row['regionz'];?>" selected><?php echo $row['regionz'];?></option>
               <?php
                   $query = "SELECT * FROM lib_regions"; 
                   try 
@@ -211,7 +232,7 @@ body {
                             <div class="col-sm-12">
                               <select class="form-control" id="prov" name="prov" onChange='getCity(this.value)' required>           
                                 <option value="" >Select Province</option>
-                                <option selected><?php echo $row['province'];?></option>
+                                <option value="<?php echo $row['province'];?>"selected><?php echo $row['province'];?></option>
                               </select>
                           </div>
                         </div>
@@ -219,7 +240,7 @@ body {
                             <div class="col-sm-12">
                               <select class="form-control cleanselect" id="city" name="city" onChange='getBrgy(this.value)' required>
                                 <option value="" >City/Municipality</option>
-                                <option selected><?php echo $row['municipality'];?></option>
+                                <option value="<?php echo $row['municipality'];?>"selected><?php echo $row['municipality'];?></option>
                               </select>
                             </div>
                         </div>
@@ -242,40 +263,52 @@ body {
     <div class="col-md-2"></div>
 </div>
 <script>
+/*function intervent() {
+  var intervent = $('#pintervention option:selected').val();
+  if (intervent == "Training" || intervent == "Placement") {
+      $('#indirectholder').slideDown(500);
+  }
+  if (intervent == "Direct Employment") {
+      $('#indirectholder').fadeOut(500);
+  }
+} */
 function getProv(val) {
 
   var formData = { 'region' : $('#region option:selected').val() };
-      $.ajax({
-        type: "POST",
-        url: "getProv.php",
-        data: formData,
-        success: function(data) {
-                  $("#prov").prop('disabled', false);
-                  $("#prov").html(data);
-     }
+  $.ajax({
+  type: "POST",
+  url: "getProv.php",
+  data: formData,
+  success: function(data) {
+            $("#prov").prop('disabled', false);
+            $("#prov").html(data);
+        }
+
   });
 }
 function getCity(val) {
+
   var formData = { 'provi' : $('#prov option:selected').val() };
-      $.ajax({
-        type: "POST",
-        url: "getCity.php",
-        data: formData,
-        success: function(data) {
-                  $("#city").prop('disabled', false);
-                  $("#city").html(data);
-     }
+  $.ajax({
+  type: "POST",
+  url: "getCity.php",
+  data: formData,
+  success: function(data) {
+            $("#city").prop('disabled', false);
+            $("#city").html(data);
+        }
+
   });
 }
 function getBrgy(val) {
   var formData = { 'city' : $('#city option:selected').val() };
-      $.ajax({
-        type: "POST",
-        url: "getBrgy.php",
-        data: formData,
-        success: function(data) {
-                  $("#brgy").prop('disabled', false);
-                  $("#brgy").html(data);
+  $.ajax({
+  type: "POST",
+  url: "getBrgy.php",
+  data: formData,
+  success: function(data) {
+            $("#brgy").prop('disabled', false);
+            $("#brgy").html(data);
         }
 
   });
@@ -288,8 +321,10 @@ $("#formsubmit").click(function() {
           'psic'               : $('#psic option:selected').val(),
           'website'            : $('input[name=website]').val(),
           'yearsofop'          : $('input[name=yearsofop]').val(),
-          'ptype'              : $('#ptype option:selected').val(),
+          'psector'            : $('#psector option:selected').val(),
+          'pintervention'      : $('#pintervention option:selected').val(),
           'contactperson'      : $('input[name=contactperson]').val(),
+          'contacttitle'       : $('input[name=contacttitle]').val(),
           'contactemail'       : $('input[name=contactemail]').val(),
           'contactnumber'      : $('input[name=contactnumber]').val(),
           'engagemeans'        : $('#engagemeans option:selected').val(),

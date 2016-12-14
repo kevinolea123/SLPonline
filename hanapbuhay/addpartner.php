@@ -5,6 +5,8 @@ if(!empty($_POST))
 { 
 //filter input
 $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+
    if (empty($_POST["orgname"])) {
      echo "Organization Name is required";
      die;
@@ -12,11 +14,12 @@ $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
      $orgname = test_input($_POST["orgname"]);
    }
    if (empty($_POST["psic"])) {
-     echo "Sector is required";
+     echo "Primary Industry is required";
      die;
    } else {
      $psic = test_input($_POST["psic"]);
    }
+
    if (empty($_POST["contactperson"])) {
      echo "Contact person is required";
      die;
@@ -27,6 +30,15 @@ $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
        die;
      }
    }
+
+   if(empty($_POST['pintervention'])) {
+   echo "Intervention type is required";
+   die;
+   } else {
+   $pintervention = test_input($_POST['pintervention']);
+   }
+
+
    if (empty($_POST["contactnumber"])) {
      echo "Contact number is required";
      die;
@@ -37,42 +49,47 @@ $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
        die;
      }
    }
+
+   
         $contactemail = test_input($_POST["contactemail"]);
         if(!filter_var($_POST['contactemail'], FILTER_VALIDATE_EMAIL)) { 
             echo "contactemail"; 
             die;
         } 
-    if (empty($_POST["address"])) {
+    
+  if (empty($_POST["address"])) {
      echo "Address is required";
-    die;
-  } else {
+     die;
+   } else {
      $address = test_input($_POST["address"]);
      if (!preg_match("/^[a-zA-Z0-9\,\.\#\- ]*$/",$address)) {
        echo "address"; 
-    die;
+       die;
      }
    }
+
     $contactnumber = test_input($_POST["contactnumber"]);
     if (!preg_match("/^[0-9]*$/",$contactnumber)) {
        echo "contactnumber"; 
        die;
     }
+
     $established = test_input($_POST["yearsofop"]);
     if (!preg_match("/^[0-9\/]*$/",$established)) {
        echo "established"; 
        die;
     }
-    $website = test_input($_POST["website"]); 
-    $ptype = test_input($_POST["ptype"]);
-     if (!preg_match("/^[a-zA-Z0-9\(\) ]*$/",$ptype)) {
-       echo "ptype"; 
-       die;
-     } 
-    $contacttitle = test_input($_POST["contacttitle"]);
-    $npmo = 0;
+     $website = test_input($_POST["website"]);
+     $psector = $_POST["psector"];
+  
+     
+     $contacttitle = test_input($_POST["contacttitle"]);
+
+     $npmo = 0;
      if ($_SESSION['filter']=="NPMO") {
-    $npmo = 1;
+      $npmo = 1;
      }
+
         $query2 = " 
             INSERT IGNORE INTO PRTemployers ( 
                 orgname, 
@@ -83,8 +100,9 @@ $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
                 contactnumber, 
                 address, 
                 established, 
-                website, 
-                ptype, 
+                psector,
+                website,
+                pintervention, 
                 region, 
                 province, 
                 municipality, 
@@ -93,7 +111,7 @@ $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
                 engagement_means, 
                 engagement_cost, 
                 npmo
-            ) VALUES ( 
+                ) VALUES ( 
                 :orgname, 
                 :psic, 
                 :contactperson, 
@@ -102,8 +120,9 @@ $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
                 :contactnumber, 
                 :address, 
                 :established, 
+                :psector,
                 :website, 
-                :ptype, 
+                :pintervention,
                 :region, 
                 :province, 
                 :municipality, 
@@ -112,6 +131,7 @@ $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
                 :engagement_means, 
                 :engagement_cost, 
                 :npmo
+                
             ) 
         "; 
         $query_params2 = array( 
@@ -123,8 +143,9 @@ $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
             ':contactnumber' => $contactnumber, 
             ':address' => $address, 
             ':established' => $established, 
+            ':psector' => $psector,
             ':website' => $website, 
-            ':ptype' => $ptype, 
+            ':pintervention' => $pintervention,
             ':region' => $_POST['region'], 
             ':province' => $_POST['province'], 
             ':municipality' => $_POST['municipality'],
@@ -133,25 +154,31 @@ $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
             ':engagement_means' => $_POST['engagemeans'], 
             ':engagement_cost' => $_POST['engagecost'],
             ':npmo' => $npmo
-        );  
+           
+        ); 
+         
         try 
         { 
             // Execute the query to create the user 
             $stmt = $db->prepare($query2); 
             $result = $stmt->execute($query_params2);
+
         } 
         catch(PDOException $ex) 
         { 
             die("Failed to run queryyy: " . $ex->getMessage()); 
         }
+
         $refid = $db->lastInsertId();
         $postregion = explode(',', $_POST['regionarray']);
+
         $stmt = $db->prepare("INSERT INTO PRTemployersloc (refid, region, province, municipality, isorig) VALUES (:refid, :region, :province, :municipality, :isorig)");
         $stmt->bindParam(':refid', $locrefid);
         $stmt->bindParam(':region', $regL);
         $stmt->bindParam(':province', $provL);
         $stmt->bindParam(':municipality', $muniL);
         $stmt->bindParam(':isorig', $origL);
+
         $reglength = count($postregion);
         for ($i=0;$i<($reglength+1);$i++) {
             $locrefid= $refid;
@@ -168,7 +195,9 @@ $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
             }
             $stmt->execute();
         }
+
         byteMe($_SESSION['id'],'hb_partner_adds',1);
   echo "loginok";      
 }//end post
+     
 ?>
