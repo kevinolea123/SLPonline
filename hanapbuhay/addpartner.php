@@ -7,6 +7,7 @@ if(!empty($_POST))
 $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
 
+
    if (empty($_POST["orgname"])) {
      echo "Organization Name is required";
      die;
@@ -89,7 +90,7 @@ $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
      if ($_SESSION['filter']=="NPMO") {
       $npmo = 1;
      }
-
+date_default_timezone_set('Asia/Brunei');
         $query2 = " 
             INSERT IGNORE INTO PRTemployers ( 
                 orgname, 
@@ -168,7 +169,7 @@ $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
         { 
             die("Failed to run queryyy: " . $ex->getMessage()); 
         }
-
+          byteMe($_SESSION['id'],'hb_partner_adds',1);
         $refid = $db->lastInsertId();
         $postregion = explode(',', $_POST['regionarray']);
 
