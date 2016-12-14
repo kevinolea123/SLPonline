@@ -57,7 +57,7 @@ if(!empty($_POST))
     if($_POST['action'] == "reuploadpics") {
             $ext=date("mdY");
             $maxsize=5000000;
-            $FILE_EXTS = array('jpg','jpeg','png', 'bmp', 'tiff');      
+             $FILE_EXTS = array('jpg','jpeg','png', 'bmp', 'JPG', 'JPEG', 'PNG', 'BMP');          
             $file_name = $_FILES['file']['name'];
             $file_name = preg_replace("/ /", "-", $file_name);
             $file_ext = pathinfo($file_name, PATHINFO_EXTENSION);
