@@ -1,7 +1,7 @@
 <?php
     require "../zxcd9.php";
     byteMe($_SESSION['id'],'vc_upload',0.10);
-            $stmt = $db->prepare("SELECT MAX(id) as id FROM DOCDB");
+            $stmt = $db->prepare("SELECT MAX(id) as id FROM doc_db");
             $stmt->execute();
             $rowz = $stmt->fetch();
     ?>
@@ -466,17 +466,19 @@
                           <input type="text" name="author" id="autocompleteajax2" class="form-control" placeholder="Author (if applicable)"/>
                           <input type="hidden" id="autocomplete-ajax-x-2" disabled="disabled"/>
                       </div>
-                      <div class="row" id="officeholder" style="display:none">
+                      <div class="row" id="officeholder" style="display:none;">
                         <div class="col-sm-6">
                           <div class="input-group">
                            <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-import" ></span></span>
-                           <input class="form-control" placeholder="Source Office" style="" id="sourceoffice" name="sourceoffice" required/><center>
+                          <input type="text" name="sourceoffice" id="autocompleteajax3" class="form-control" placeholder="Source Office" required /><center>
+                          <input type="hidden" id="autocomplete-ajax-x-3" disabled="disabled"/>
                           </div>
                         </div>
                        <div class="col-sm-6">
                           <div class="input-group">
                            <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-export"></span></span>
-                           <input class="form-control" placeholder="Destination Office" style="" id="destoffice" name="destoffice" required/><center>
+                           <input type="text" name="destoffice" id="autocompleteajax4" class="form-control" placeholder="Destination Office" required/><center>
+                          <input type="hidden" id="autocomplete-ajax-x-4" disabled="disabled"/>
                           </div>
                         </div>
                       </div>
@@ -484,13 +486,16 @@
                         <div class="col-sm-6">
                           <div class="input-group">
                           <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-import"></span></span>
-                           <input class="form-control" placeholder="Source Name" style="" id="sourcename" name="sourcename" required/><center>
+                           <input type="text" name="sourcename" id="autocompleteajax5" class="form-control" placeholder="Source Name" required /><center>
+                           <input type="hidden" id="autocomplete-ajax-x-5" disabled="disabled"/>
+
                           </div>
                         </div>
                         <div class="col-sm-6">
                           <div class="input-group">
                           <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-export"></span></span>
-                           <input class="form-control" placeholder="Destination Name" style="" id="destname" name="destname" required/><center>
+                           <input type="text" name="destname" id="autocompleteajax6" class="form-control" placeholder="Destination Name" required /><center>
+                           <input type="hidden" id="autocomplete-ajax-x-6" disabled="disabled"/>
                           </div>
                         </div>
                       </div>
@@ -498,13 +503,15 @@
                         <div class="col-sm-6">
                           <div class="input-group">
                           <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-import"></span></span>
-                            <input class="form-control" placeholder="Source Position" style="" id="sourcepos" name="sourcepos" required/><center>
+                            <input type="text" name="sourcepos" id="autocompleteajax7" class="form-control" placeholder="Source Position" required /><center>
+                            <input type="hidden" id="autocomplete-ajax-x-7" disabled="disabled"/>
                           </div>
                         </div>
                         <div class="col-sm-6">
                           <div class="input-group">
                           <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-export"></span></span>
-                           <input class="form-control" placeholder="Destination Position" style="" id="destpos" name="destpos" required/><center>
+                           <input type="text" name="destpos" id="autocompleteajax8" class="form-control" placeholder="Destination Position" required /><center>
+                           <input type="hidden" id="autocomplete-ajax-x-8" disabled="disabled"/>
                           </div>
                         </div>
                       </div>
@@ -596,7 +603,7 @@
                               </select>
                           </div>
                       </div>
-    <?PhP
+    <?php
     $sql = "SELECT id, CONCAT(lastname, ', ', firstname) as name FROM hr_db";
     //$partnerIDArray = [];
     //$partnerArray = [];
@@ -661,6 +668,187 @@
     });
     });
     </script>
+     <?php
+    $sql1 = "SELECT * FROM doc_directory";
+    //$partnerIDArray = [];
+    //$partnerArray = [];
+    foreach ($db->query($sql1) as $results1)
+    {
+      $partnerIDArray1[] = intval($results1["id"]);
+      $partnerArray1[] = $results1["srcoffice"];
+    }
+    $object = new StdClass;
+    $i = 0;
+    foreach ($partnerIDArray1 as $so)
+    {
+      $object->$so = $partnerArray1[$i];  
+      $i++;
+    }
+    ?>
+    <script>
+    $(document).ready(function() {
+      window.selectPartner = "";
+      window.taggedPeople = [];
+    $(function () {
+        'use strict';
+        var countriesArray = $.map(<?php echo json_encode($object);?>, function (value, key) { return { value: value, data: key }; });
+        $('#autocompleteajax3').autocomplete({
+            lookup: countriesArray,
+            lookupFilter: function(suggestion, originalQuery, queryLowerCase) {
+                var re = new RegExp('\\b' + $.Autocomplete.utils.escapeRegExChars(queryLowerCase), 'gi');
+                return re.test(suggestion.value);
+            },
+            onSelect: function(suggestion) {
+                $('#autocompleteajax3').val(suggestion.value);
+                window.selectPartner3 = suggestion.data;
+            },
+            onHint: function (hint) {
+                $('#autocomplete-ajax-x-3').val(hint);
+            },
+            onInvalidateSelection: function() {         
+            }
+        });
+           $('#autocompleteajax4').autocomplete({
+            lookup: countriesArray,
+            lookupFilter: function(suggestion, originalQuery, queryLowerCase) {
+                var re = new RegExp('\\b' + $.Autocomplete.utils.escapeRegExChars(queryLowerCase), 'gi');
+                return re.test(suggestion.value);
+            },
+            onSelect: function(suggestion) {
+                $('#autocompleteajax4').val(suggestion.value);
+                window.selectPartner4 = suggestion.data;
+            },
+            onHint: function (hint) {
+                $('#autocomplete-ajax-x-4').val(hint);
+            },
+            onInvalidateSelection: function() {         
+            }
+        });
+
+    });
+    });
+    </script>
+      <?php
+    $sql2 = "SELECT * FROM doc_directory";
+    //$partnerIDArray = [];
+    //$partnerArray = [];
+    foreach ($db->query($sql2) as $results2)
+    {
+      $partnerIDArray2[] = intval($results2["id"]);
+      $partnerArray2[] = $results2["srcname"];
+    }
+    $object = new StdClass;
+    $i = 0;
+    foreach ($partnerIDArray2 as $sn)
+    {
+      $object->$sn = $partnerArray2[$i];  
+      $i++;
+    }
+    ?>
+    <script>
+    $(document).ready(function() {
+      window.selectPartner = "";
+      window.taggedPeople = [];
+    $(function () {
+        'use strict';
+        var countriesArray = $.map(<?php echo json_encode($object);?>, function (value, key) { return { value: value, data: key }; });
+        $('#autocompleteajax5').autocomplete({
+            lookup: countriesArray,
+            lookupFilter: function(suggestion, originalQuery, queryLowerCase) {
+                var re = new RegExp('\\b' + $.Autocomplete.utils.escapeRegExChars(queryLowerCase), 'gi');
+                return re.test(suggestion.value);
+            },
+            onSelect: function(suggestion) {
+                $('#autocompleteajax5').val(suggestion.value);
+                window.selectPartner5 = suggestion.data;
+            },
+            onHint: function (hint) {
+                $('#autocomplete-ajax-x-5').val(hint);
+            },
+            onInvalidateSelection: function() {         
+            }
+        });
+           $('#autocompleteajax6').autocomplete({
+            lookup: countriesArray,
+            lookupFilter: function(suggestion, originalQuery, queryLowerCase) {
+                var re = new RegExp('\\b' + $.Autocomplete.utils.escapeRegExChars(queryLowerCase), 'gi');
+                return re.test(suggestion.value);
+            },
+            onSelect: function(suggestion) {
+                $('#autocompleteajax6').val(suggestion.value);
+                window.selectPartner6 = suggestion.data;
+            },
+            onHint: function (hint) {
+                $('#autocomplete-ajax-x-6').val(hint);
+            },
+            onInvalidateSelection: function() {         
+            }
+        });
+
+    });
+    });
+    </script>
+     <?php
+    $sql3 = "SELECT * FROM doc_directory";
+    //$partnerIDArray = [];
+    //$partnerArray = [];
+    foreach ($db->query($sql3) as $results3)
+    {
+      $partnerIDArray3[] = intval($results3["id"]);
+      $partnerArray3[] = $results3["srcpos"];
+    }
+    $object = new StdClass;
+    $i = 0;
+    foreach ($partnerIDArray3 as $sp)
+    {
+      $object->$sp = $partnerArray3[$i];  
+      $i++;
+    }
+    ?>
+    <script>
+    $(document).ready(function() {
+      window.selectPartner = "";
+      window.taggedPeople = [];
+    $(function () {
+        'use strict';
+        var countriesArray = $.map(<?php echo json_encode($object);?>, function (value, key) { return { value: value, data: key }; });
+        $('#autocompleteajax7').autocomplete({
+            lookup: countriesArray,
+            lookupFilter: function(suggestion, originalQuery, queryLowerCase) {
+                var re = new RegExp('\\b' + $.Autocomplete.utils.escapeRegExChars(queryLowerCase), 'gi');
+                return re.test(suggestion.value);
+            },
+            onSelect: function(suggestion) {
+                $('#autocompleteajax7').val(suggestion.value);
+                window.selectPartner7 = suggestion.data;
+            },
+            onHint: function (hint) {
+                $('#autocomplete-ajax-x-7').val(hint);
+            },
+            onInvalidateSelection: function() {         
+            }
+        });
+           $('#autocompleteajax8').autocomplete({
+            lookup: countriesArray,
+            lookupFilter: function(suggestion, originalQuery, queryLowerCase) {
+                var re = new RegExp('\\b' + $.Autocomplete.utils.escapeRegExChars(queryLowerCase), 'gi');
+                return re.test(suggestion.value);
+            },
+            onSelect: function(suggestion) {
+                $('#autocompleteajax8').val(suggestion.value);
+                window.selectPartner8 = suggestion.data;
+            },
+            onHint: function (hint) {
+                $('#autocomplete-ajax-x-8').val(hint);
+            },
+            onInvalidateSelection: function() {         
+            }
+        });
+
+    });
+    });
+    </script>
+
                       <b>Notify Individuals</b><br>
                       <div class="form-group">
                         <input type="text" name="autocompleteajax" id="autocompleteajax" class="form-control" placeholder="Search for individuals.."/>
@@ -800,19 +988,19 @@
            fd.append('file', file1);
            fd.append('doctype', $('#doctypeselector option:selected').val());
            fd.append('docsubject', $('input[name=dsubject]').val());
-           fd.append('author', $('#autocompleteajax2').val());
+           fd.append('author', $('input[name=author]').val());
            fd.append('ddate', $('input[name=ddate]').val());
            fd.append('remarks', $('textarea[name=remarks]').val());
            fd.append('admintype', $('#admintype option:selected').text());
            fd.append('logtype', $('#logtype option:selected').text());
            fd.append('refnumber', $('input[name=refnumber]').val());
-           fd.append('sourceoffice', $('input[name=sourceoffice]').val());
-           fd.append('sourcename', $('input[name=sourcename]').val());
-           fd.append('destoffice', $('input[name=destoffice]').val());
-           fd.append('destname', $('input[name=destname').val());
+           fd.append('sourceoffice',$('#autocompleteajax3').val());
+           fd.append('sourcename', $('#autocompleteajax5').val());
+           fd.append('destoffice', $('#autocompleteajax4').val());
+           fd.append('destname', $('#autocompleteajax6').val());
            fd.append('resdate', $('input[name=resdate]').val());
-           fd.append('destpos', $('input[name=destpos]').val());
-           fd.append('sourcepos', $('input[name=sourcepos]').val());
+           fd.append('destpos', $('#autocompleteajax8').val());
+           fd.append('sourcepos', $('#autocompleteajax7').val());
            fd.append('switch', switchClass);
            fd.append('emailarray', emailfinal.toString());
            $.ajax({
