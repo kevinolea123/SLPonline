@@ -363,7 +363,7 @@
                           <div class="input-group-btn">
                             <div class="fileUpload btn btn-primary">
                                 <span><span class="glyphicon glyphicon-folder-open"></span> &nbsp; Choose File</span>
-                                <input id="theupload" name="theupload" type="file" class="upload" required/>
+                                <input id="theupload" name="theupload" type="file" class="upload" />
                             </div>
                           </div>
                         </div>
@@ -442,7 +442,7 @@
                       <div class="row">
                         <div class="col-sm-6">
                           <div class="form-group" style="display: none" id="logtypeholder">
-                           <select class="form-control" id="logtype" name="logtype" required>
+                           <select class="form-control" id="logtype" name="logtype" >
                             <option value="">Select Log Type</option>
                             <option value="I" id="in">Incoming</option>
                             <option value="O" id="out">Outgoing</option>
@@ -460,7 +460,7 @@
                         </div>
                       </div>
                       <div class="form-group" style="" id="docsubject">
-                          <input class="form-control" placeholder="Document Title / Subject" style="" id="dsubject" name="dsubject" required/><center>
+                          <input class="form-control" placeholder="Document Title / Subject" style="" id="dsubject" name="dsubject"/><center>
                       </div>
                       <div class="form-group" style="" id="authorholder">
                           <input type="text" name="author" id="autocompleteajax2" class="form-control" placeholder="Author (if applicable)"/>
@@ -470,14 +470,14 @@
                         <div class="col-sm-6">
                           <div class="input-group">
                            <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-import" ></span></span>
-                          <input type="text" name="sourceoffice" id="autocompleteajax3" class="form-control" placeholder="Source Office" required /><center>
+                          <input type="text" name="sourceoffice" id="autocompleteajax3" class="form-control" placeholder="Source Office" /><center>
                           <input type="hidden" id="autocomplete-ajax-x-3" disabled="disabled"/>
                           </div>
                         </div>
                        <div class="col-sm-6">
                           <div class="input-group">
                            <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-export"></span></span>
-                           <input type="text" name="destoffice" id="autocompleteajax4" class="form-control" placeholder="Destination Office" required/><center>
+                           <input type="text" name="destoffice" id="autocompleteajax4" class="form-control" placeholder="Destination Office" /><center>
                           <input type="hidden" id="autocomplete-ajax-x-4" disabled="disabled"/>
                           </div>
                         </div>
@@ -486,7 +486,7 @@
                         <div class="col-sm-6">
                           <div class="input-group">
                           <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-import"></span></span>
-                           <input type="text" name="sourcename" id="autocompleteajax5" class="form-control" placeholder="Source Name" required /><center>
+                           <input type="text" name="sourcename" id="autocompleteajax5" class="form-control" placeholder="Source Name" /><center>
                            <input type="hidden" id="autocomplete-ajax-x-5" disabled="disabled"/>
 
                           </div>
@@ -494,7 +494,7 @@
                         <div class="col-sm-6">
                           <div class="input-group">
                           <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-export"></span></span>
-                           <input type="text" name="destname" id="autocompleteajax6" class="form-control" placeholder="Destination Name" required /><center>
+                           <input type="text" name="destname" id="autocompleteajax6" class="form-control" placeholder="Destination Name"/><center>
                            <input type="hidden" id="autocomplete-ajax-x-6" disabled="disabled"/>
                           </div>
                         </div>
@@ -503,14 +503,14 @@
                         <div class="col-sm-6">
                           <div class="input-group">
                           <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-import"></span></span>
-                            <input type="text" name="sourcepos" id="autocompleteajax7" class="form-control" placeholder="Source Position" required /><center>
+                            <input type="text" name="sourcepos" id="autocompleteajax7" class="form-control" placeholder="Source Position" /><center>
                             <input type="hidden" id="autocomplete-ajax-x-7" disabled="disabled"/>
                           </div>
                         </div>
                         <div class="col-sm-6">
                           <div class="input-group">
                           <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-export"></span></span>
-                           <input type="text" name="destpos" id="autocompleteajax8" class="form-control" placeholder="Destination Position" required /><center>
+                           <input type="text" name="destpos" id="autocompleteajax8" class="form-control" placeholder="Destination Position" /><center>
                            <input type="hidden" id="autocomplete-ajax-x-8" disabled="disabled"/>
                           </div>
                         </div>
@@ -519,20 +519,20 @@
                       <div class="row">
                         <div class="col-sm-6">
                           <div class="form-group" style="" id="ddateholder">
-                            <input class="form-control" placeholder="Date on Document" style="" id="ddate" name="ddate" required/><center>
+                            <input class="form-control" placeholder="Date on Document" style="" id="ddate" name="ddate" /><center>
                             <div class="col-sm-8"></div>
                           </div>
                         </div>
                         <div class="col-sm-6">
                           <div class="form-group" style="display:none;" id="resdateholder">
-                           <input class="form-control" placeholder="Date Received" style="" id="resdate" name="resdate" required/><center>
+                           <input class="form-control" placeholder="Date Received" style="" id="resdate" name="resdate" /><center>
                             <div class="col-sm-8">
                             </div>
                           </div>
                         </div>
                       </div>
                       <div class="form-group" style="">
-                          <textarea rows="3" class="form-control" placeholder="Remarks" style="padding-top:0.6em;resize:none" id="remarks" name="remarks" required></textarea><center>
+                          <textarea rows="3" class="form-control" placeholder="Remarks" style="padding-top:0.6em;resize:none" id="remarks" name="remarks" ></textarea><center>
                       </div>
                       <div style="display:block;font-weight:bold">Send a notification for this upload: &nbsp; <div id="theswitch" class="bootstrap-switch bootstrap-switch-wrapper bootstrap-switch-animate bootstrap-switch-id-custom-switch-01 bootstrap-switch-off"><div class="bootstrap-switch-container"><span class="bootstrap-switch-handle-on bootstrap-switch-primary">YES</span><label class="bootstrap-switch-label">&nbsp;</label><span class="bootstrap-switch-handle-off bootstrap-switch-default">NO</span><input type="checkbox" checked="" data-toggle="switch" id="custom-switch-01"></div></div></div>
                       <div id="notificationpanel" style="margin-top:1em;display:none">
