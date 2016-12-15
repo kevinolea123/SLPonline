@@ -171,7 +171,6 @@ date_default_timezone_set('Asia/Brunei');
         }
 
 
-        byteMe($_SESSION['id'],'hb_partner_adds',1);
         $refid = $db->lastInsertId();
         $postregion = explode(',', $_POST['regionarray']);
 
@@ -198,6 +197,8 @@ date_default_timezone_set('Asia/Brunei');
             }
             $stmt->execute();
         }
+        
+        byteMe($_SESSION['id'],'hb_partner_adds',1);
   echo "loginok";      
 }//end post
      

@@ -4,6 +4,8 @@
     if(!empty($_POST)) 
     { 
     //filter input
+
+    date_default_timezone_set('Asia/Brunei');
     $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
        if (empty($_POST["firstname"])) {
          echo "firstname";
@@ -169,7 +171,7 @@
                 ':remarks' => $_POST["remarks"], 
                 ':hasNSO' => $_POST["hasnso"], 
                 ':hasNBI' => $_POST["hasnbi"], 
-                ':encoded' => date("Y-m-d"), 
+                ':encoded' => date("Y-m-d H:i:sa"), 
                 ':encodedby' => $_SESSION["id"], 
                 ':height' => $height, 
                 ':contactnumber' => $contactnumber, 

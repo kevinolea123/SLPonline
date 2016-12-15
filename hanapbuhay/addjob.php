@@ -4,6 +4,8 @@
         if(!empty($_POST)) 
         { 
         //filter input
+
+        date_default_timezone_set('Asia/Brunei');
         $_GET   = filter_input_array(INPUT_GET, FILTER_SANITIZE_STRING);
         $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
            if (empty($_POST["sector"])) {
@@ -231,6 +233,7 @@
                 } else {
                     $region = $_SESSION["filter"];
                 }
+
                 $query_params2 = array(
                     ':partner' => $partner, 
                     ':jobname' => $jobname, 
@@ -255,7 +258,7 @@
                     ':contactemail' => $contactemail,
                     ':contactnumber' => $contactnumber,
                     ':encodedby' => $_SESSION['id'],
-                    ':encoded' => date('Y-m-d')
+                    ':encoded' => date('Y-m-d H:i:sa')
                 ); 
                 try { 
                     // Execute the query to create the user 
