@@ -413,6 +413,10 @@ try {
                                   echo '<div class="row"><div class="col-md-3"><a href="../hr/user.php?id='.$rowsb[5].'"><img src="../imgs/partner.png" width="50" height="50" style="border-radius:50%"></div><div class="col-md-9"><b>'.$rowsb[1].' '.$rowsb[2].'</b></a>&nbsp;Deleted a file in E-Library<br><span style="color:#999;font-size:9px">'.date("M j - h:i a",strtotime($rowsb[3])).'</span></div></div><hr>';
                             }elseif($rowsb[0]=='hb_partner_adds') {  
                                   echo '<div class="row"><div class="col-md-3"><a href="../hr/user.php?id='.$rowsb[5].'"><img src="../imgs/partner.png" width="50" height="50" style="border-radius:50%"></div><div class="col-md-9"><b>'.$rowsb[1].' '.$rowsb[2].'</b></a>&nbsp;Added a partner.<br><span style="color:#999;font-size:9px">'.date("M j - h:i a",strtotime($rowsb[3])).'</span></div></div><hr>';
+                            }elseif($rowsb[0]=='hb_jobs_add') {  
+                                  echo '<div class="row"><div class="col-md-3"><a href="../hr/user.php?id='.$rowsb[5].'"><img src="../imgs/partner.png" width="50" height="50" style="border-radius:50%"></div><div class="col-md-9"><b>'.$rowsb[1].' '.$rowsb[2].'</b></a>&nbsp;Added a job.<br><span style="color:#999;font-size:9px">'.date("M j - h:i a",strtotime($rowsb[3])).'</span></div></div><hr>';
+                            }elseif($rowsb[0]=='hb_supply_add') {  
+                                  echo '<div class="row"><div class="col-md-3"><a href="../hr/user.php?id='.$rowsb[5].'"><img src="../imgs/partner.png" width="50" height="50" style="border-radius:50%"></div><div class="col-md-9"><b>'.$rowsb[1].' '.$rowsb[2].'</b></a>&nbsp;Added a participant.<br><span style="color:#999;font-size:9px">'.date("M j - h:i a",strtotime($rowsb[3])).'</span></div></div><hr>';
                             }
                         }else {
                             if($rowsb[0]=="upload") { 
@@ -424,7 +428,11 @@ try {
                             }elseif($rowsb[0]=="deleted"){
                                   echo '<div class="row"><div class="col-md-3"><a href="../hr/user.php?id='.$rowsb[5].'"><img src="../imgs/female.png" width="50" height="50" style="border-radius:50%"></div><div class="col-md-9"><b>'.$rowsb[1].' '.$rowsb[2].'</b></a>&nbsp;Deleted a file in E-Library<br><span style="color:#999;font-size:9px">'.date("M j - h:i a",strtotime($rowsb[3])).'</span></div></div><hr>';
                             }elseif($rowsb[0]=="hb_partner_adds"){
-                                  echo '<div class="row"><div class="col-md-3"><a href="../hr/user.php?id='.$rowsb[5].'"><img src="../imgs/female.png" width="50" height="50" style="border-radius:50%"></div><div class="col-md-9"><b>'.$rowsb[1].' '.$rowsb[2].'</b></a>&nbsp;Added a partner<br><span style="color:#999;font-size:9px">'.date("M j - h:i a",strtotime($rowsb[3])).'</span></div></div><hr>';
+                                  echo '<div class="row"><div class="col-md-3"><a href="../hr/user.php?id='.$rowsb[5].'"><img src="../imgs/female.png" width="50" height="50" style="border-radius:50%"></div><div class="col-md-9"><b>'.$rowsb[1].' '.$rowsb[2].'</b></a>&nbsp;Added a partner.<br><span style="color:#999;font-size:9px">'.date("M j - h:i a",strtotime($rowsb[3])).'</span></div></div><hr>';
+                            }elseif($rowsb[0]=="hb_jobs_add"){
+                                  echo '<div class="row"><div class="col-md-3"><a href="../hr/user.php?id='.$rowsb[5].'"><img src="../imgs/female.png" width="50" height="50" style="border-radius:50%"></div><div class="col-md-9"><b>'.$rowsb[1].' '.$rowsb[2].'</b></a>&nbsp;Added a job.<br><span style="color:#999;font-size:9px">'.date("M j - h:i a",strtotime($rowsb[3])).'</span></div></div><hr>';
+                            }elseif($rowsb[0]=="hb_supply_add"){
+                                  echo '<div class="row"><div class="col-md-3"><a href="../hr/user.php?id='.$rowsb[5].'"><img src="../imgs/female.png" width="50" height="50" style="border-radius:50%"></div><div class="col-md-9"><b>'.$rowsb[1].' '.$rowsb[2].'</b></a>&nbsp;Added a participant.<br><span style="color:#999;font-size:9px">'.date("M j - h:i a",strtotime($rowsb[3])).'</span></div></div><hr>';
                             }
                         }
 
@@ -439,11 +447,14 @@ try {
                                   echo '<div class="row"><div class="col-md-3"><a href="../hr/user.php?id='.$rowsb[5].'"><img src="../docs/profilepics/'.$rowsb[4].'" width="50" height="50" style="border-radius:50%"></div><div class="col-md-9"><b>'.$rowsb[1].' '.$rowsb[2].'</b></a>&nbsp;Updated his profile picture.<br><span style="color:#999;font-size:9px">'.date("M j - h:i a",strtotime($rowsb[3])).'</span></div></div><hr>';
                         }elseif($rowsb[0]=="deleted"){
                                   echo '<div class="row"><div class="col-md-3"><a href="../hr/user.php?id='.$rowsb[5].'"><img src="../docs/profilepics/'.$rowsb[4].'" width="50" height="50" style="border-radius:50%"></div><div class="col-md-9"><b>'.$rowsb[1].' '.$rowsb[2].'</b></a>&nbsp;Deleted a file in E-Library<br><span style="color:#999;font-size:9px">'.date("M j - h:i a",strtotime($rowsb[3])).'</span></div></div><hr>';
-                            }elseif($rowsb[0]=="hb_partner_adds"){
+                        }elseif($rowsb[0]=="hb_partner_adds"){
                                   echo '<div class="row"><div class="col-md-3"><a href="../hr/user.php?id='.$rowsb[5].'"><img src="../docs/profilepics/'.$rowsb[4].'" width="50" height="50" style="border-radius:50%"></div><div class="col-md-9"><b>'.$rowsb[1].' '.$rowsb[2].'</b></a>&nbsp;Added a partner.<br><span style="color:#999;font-size:9px">'.date("M j - h:i a",strtotime($rowsb[3])).'</span></div></div><hr>';
-                            }
-                    }
-                    else{
+                        }elseif($rowsb[0]=="hb_jobs_add"){
+                                  echo '<div class="row"><div class="col-md-3"><a href="../hr/user.php?id='.$rowsb[5].'"><img src="../docs/profilepics/'.$rowsb[4].'" width="50" height="50" style="border-radius:50%"></div><div class="col-md-9"><b>'.$rowsb[1].' '.$rowsb[2].'</b></a>&nbsp;Added a job.<br><span style="color:#999;font-size:9px">'.date("M j - h:i a",strtotime($rowsb[3])).'</span></div></div><hr>';
+                        }elseif($rowsb[0]=="hb_supply_add"){
+                                  echo '<div class="row"><div class="col-md-3"><a href="../hr/user.php?id='.$rowsb[5].'"><img src="../docs/profilepics/'.$rowsb[4].'" width="50" height="50" style="border-radius:50%"></div><div class="col-md-9"><b>'.$rowsb[1].' '.$rowsb[2].'</b></a>&nbsp;Added a participant.<br><span style="color:#999;font-size:9px">'.date("M j - h:i a",strtotime($rowsb[3])).'</span></div></div><hr>';
+                        }
+                    }else{
                         if($rowsb[0]=="upload") { 
                               echo '<div class="row"><div class="col-md-3"><a href="../hr/user.php?id='.$rowsb[5].'"><img src="../docs/profilepics/'.$rowsb[4].'" width="50" height="50" style="border-radius:50%"></div><div class="col-md-9"><b>'.$rowsb[1].' '.$rowsb[2].'</b></a>&nbsp;'.$rowsb[0].'ed a file in E-Library<br><span style="color:#999;font-size:9px">'.date("M j - h:i a",strtotime($rowsb[3])).'</span></div></div><hr>';
                         }elseif($rowsb[0]=="uploadpic"){
@@ -454,6 +465,10 @@ try {
                                   echo '<div class="row"><div class="col-md-3"><a href="../hr/user.php?id='.$rowsb[5].'"><img src="../docs/profilepics/'.$rowsb[4].'" width="50" height="50" style="border-radius:50%"></div><div class="col-md-9"><b>'.$rowsb[1].' '.$rowsb[2].'</b></a>&nbsp;Deleted a file in E-Library<br><span style="color:#999;font-size:9px">'.date("M j - h:i a",strtotime($rowsb[3])).'</span></div></div><hr>';
                         }elseif($rowsb[0]=="hb_partner_adds"){
                                   echo '<div class="row"><div class="col-md-3"><a href="../hr/user.php?id='.$rowsb[5].'"><img src="../docs/profilepics/'.$rowsb[4].'" width="50" height="50" style="border-radius:50%"></div><div class="col-md-9"><b>'.$rowsb[1].' '.$rowsb[2].'</b></a>&nbsp;Added a partner.<br><span style="color:#999;font-size:9px">'.date("M j - h:i a",strtotime($rowsb[3])).'</span></div></div><hr>';
+                        }elseif($rowsb[0]=="hb_jobs_add"){
+                                  echo '<div class="row"><div class="col-md-3"><a href="../hr/user.php?id='.$rowsb[5].'"><img src="../docs/profilepics/'.$rowsb[4].'" width="50" height="50" style="border-radius:50%"></div><div class="col-md-9"><b>'.$rowsb[1].' '.$rowsb[2].'</b></a>&nbsp;Added a job.<br><span style="color:#999;font-size:9px">'.date("M j - h:i a",strtotime($rowsb[3])).'</span></div></div><hr>';
+                        }elseif($rowsb[0]=="hb_supply_add"){
+                                  echo '<div class="row"><div class="col-md-3"><a href="../hr/user.php?id='.$rowsb[5].'"><img src="../docs/profilepics/'.$rowsb[4].'" width="50" height="50" style="border-radius:50%"></div><div class="col-md-9"><b>'.$rowsb[1].' '.$rowsb[2].'</b></a>&nbsp;Added a participant.<br><span style="color:#999;font-size:9px">'.date("M j - h:i a",strtotime($rowsb[3])).'</span></div></div><hr>';
                         }
                     }
               }        
