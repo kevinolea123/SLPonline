@@ -898,7 +898,7 @@
                   </form>
               </div>
               <div class="col-md-12" style="padding-right:0">
-                      <button id="uploadBtn" class="btn btn-success pull-right" style="padding:6px 10px 6px 10px;margin-top:0.8em" onclick="typeChange3()"><span class="glyphicon glyphicon-cloud-upload"></span> Upload</button>
+                      <button type="button" id="uploadBtn" class="btn btn-success pull-right" style="padding:6px 10px 6px 10px;margin-top:0.8em" onclick="typeChange3()"><span class="glyphicon glyphicon-cloud-upload"></span> Upload</button>
               </div>
           </div>
       </div>
@@ -914,7 +914,9 @@
                       <div class="clearfix"></div>
               </div>
             </div>
-          </div></div>
+          </div>
+
+          </div>
           <!-- Modal -->
     <script>
     $(document).ready(function() {
@@ -1014,11 +1016,12 @@
                     success: function(data){
                         $("#loadoverlay").hide();
                         if (data=="Success") {
-                          $("#sucsubtext").html("Your document was successfully upload and your Reference Number is: <br><b>"+$('input[name=refnumber]').val()+"</b>");
-                          $('#myModal').modal();
-                          $('#myModal').on('hidden.bs.modal', function () {
-                              location.href = "index.php";
-                          });
+                     $("#sucsubtext").html("Your document was successfully upload and your Reference Number is: <br><b>"+$('input[name=refnumber]').val()+"</b>");
+                      $('#myModal').modal();
+                      $('#myModal').on('hidden.bs.modal', function () {
+                          location.href = "index.php";
+                      });
+                        
                         } else {
                           alert(data);
                         }
