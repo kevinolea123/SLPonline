@@ -37,6 +37,7 @@ function test_input($data) {
 function byteMe ($recipient,$page,$amt) {
 global $db;    
         try {
+            date_default_timezone_set('Asia/Brunei');
             $stmt = $db->prepare("INSERT IGNORE INTO bytez (hrdbid,pagename,amt,added) VALUES (:hrdbid,:pagename,:amt,:added)");
             $stmt->bindParam(':hrdbid', $recipient);
             $stmt->bindParam(':pagename', $page);
@@ -44,6 +45,8 @@ global $db;
             $date2 = date("Y-m-d H:i:s");
             $stmt->bindParam(':added', $date2);
             $stmt->execute();
+
+
         } catch(PDOException $e) {
             echo "Error: " . $e->getMessage();
         }//endtry
