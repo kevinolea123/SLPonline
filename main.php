@@ -396,7 +396,7 @@ h3 {
 
 try {
 
-     $stmt=$db->prepare("SELECT bz.pagename,h2.firstname,h2.lastname,bz.added,hp1.name,h2.id,h2.sex FROM bytez as bz LEFT JOIN hr_db as h2 ON h2.id=bz.hrdbid LEFT JOIN hr_profilepics as hp1 on h2.id=hp1.hrdbid ORDER BY bz.added DESC LIMIT 2 ");
+     $stmt=$db->prepare("SELECT bz.pagename,h2.firstname,h2.lastname,bz.added,hp1.name,h2.id,h2.sex FROM bytez_recent as bz LEFT JOIN hr_db as h2 ON h2.id=bz.hrdbid LEFT JOIN hr_profilepics as hp1 on h2.id=hp1.hrdbid ORDER BY bz.added DESC LIMIT 2 ");
             $stmt->execute();
 
             while($rowsb=$stmt->fetch(PDO::FETCH_NUM,pdo::FETCH_ORI_NEXT)) { 
