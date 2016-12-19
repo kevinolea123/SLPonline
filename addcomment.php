@@ -41,14 +41,14 @@ global $db;
             $stmt->bindParam(':hrdbid', $recipient);
             $stmt->bindParam(':pagename', $page);
             $stmt->bindParam(':amt', $amt);
-            //$date2 = date("Y-m-d H:i:s");
-            //$stmt->bindParam(':added', date("Y-m-d H:i:s"));
             $date1 = date("Y-m-d H:i:s");
             $stmt->bindParam(':added', $date1);
             $stmt->execute();
+            
         } catch(PDOException $e) {
             echo "Error: " . $e->getMessage();
         }//endtry
+
             
 }
 
