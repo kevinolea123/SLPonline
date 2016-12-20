@@ -3,12 +3,12 @@ $username = "jmigdela_slpmain";
 $password = "turtles98"; 
 $host = "localhost"; 
 $dbname = "jmigdela_slponline";
-
+date_default_timezone_set('Asia/Brunei');
 $options = array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'); 
 try 
 { 
     $db = new PDO("mysql:host={$host};dbname={$dbname};charset=utf8", $username, $password, $options);
-    $db->exec("SET time_zone = '+0:00'");
+    $db->exec("SET time_zone = '+0:00'"); 
 } 
 catch(PDOException $ex) 
 { 
@@ -55,6 +55,8 @@ global $db;
 function addNotification ($recipient,$notifier,$notifmsg,$eventname,$eventlink) {
 global $db;    
         try {
+
+            date_default_timezone_set('Asia/Brunei');
             $stmt = $db->prepare("INSERT IGNORE INTO notifications (recipient,notifier,msg,eventname,eventlink,added) VALUES (:recipient,:notifier,:msg,:eventname,:eventlink,:added)");
             $stmt->bindParam(':recipient', $recipient);
             $stmt->bindParam(':notifier', $notifier);
@@ -71,6 +73,8 @@ global $db;
 function addNotificationDoc ($recipient,$notifier,$notifmsg,$eventname,$eventlink,$docid) {
 global $db;    
         try {
+
+            date_default_timezone_set('Asia/Brunei');
             $stmt = $db->prepare("INSERT IGNORE INTO notifications (recipient,notifier,msg,eventname,eventlink,added,docdbid) VALUES (:recipient,:notifier,:msg,:eventname,:eventlink,:added,:docdbid)");
             $stmt->bindParam(':recipient', $recipient);
             $stmt->bindParam(':notifier', $notifier);

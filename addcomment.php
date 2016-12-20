@@ -44,6 +44,8 @@ global $db;
             $date1 = date("Y-m-d H:i:s");
             $stmt->bindParam(':added', $date1);
             $stmt->execute();
+
+
             
         } catch(PDOException $e) {
             echo "Error: " . $e->getMessage();
