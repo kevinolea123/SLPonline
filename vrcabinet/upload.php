@@ -337,8 +337,8 @@
     <div class="container-fluid">
       <div class="col-md-12" style="padding-left:3em;padding-right:3em">
     <form id="myForm" method="POST" enctype="multipart/form-data">
-     <div class="row row-eq-height" style="height:100%;border:solid 1px #c5d6de;margin-bottom:3em">
-                    <div class="col-md-5" style="background-color:#007ee5;padding:2em;color:#fff">
+     <div class="row row-eq-height" style="height:100%;margin-bottom:3em;">
+                    <div class="col-md-5" style="background-color:#007ee5;padding:2em;color:#fff;border:solid 1px #c5d6de;">
                       SLP E-Library<h3>FILE UPLOADS</h3>
                       Uploading regular files:
                       <ul>
@@ -357,7 +357,7 @@
                         <li>Click the notification button and choose the respective offices or type the names of individuals. Submit to E-Library by clicking the "Submit and Send Notification" button.</li>
                       </ul>
                     </div>
-                    <div class="col-md-7" style="padding:3em;color:#000;padding-top:2em">
+                    <div class="col-md-7" style="background-color:#ffffff;padding:3em;color:#000;padding-top:2em;border:solid 1px #c5d6de;">
                       <div class="input-group" style="margin-bottom:0;margin-top:0">
                           <input id="uploadfilename" class="form-control" placeholder="Choose file.." disabled="disabled">
                           <div class="input-group-btn">
@@ -1008,7 +1008,7 @@
            fd.append('switch', switchClass);
            fd.append('emailarray', emailfinal.toString());
            $.ajax({
-                    url: 'f.php',
+                    url: 'functions.php',
                     dataType: 'text', 
                     cache: false,
                     contentType: false,

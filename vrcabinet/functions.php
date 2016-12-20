@@ -338,6 +338,7 @@
                                 $uploadfile = $uploaddir.$uploadname;
                                 $doctype = $_POST['doctype'];
                          if ($file_name=="") { // filename is empty 
+                            
                                 try{
                              $stmt = $db->prepare("INSERT IGNORE INTO doc_db (doctype,title,author,remarks,added,hrdbid,admindoctype,logtype,referenceno,sourceoffice,sourcename,sourcepos,destoffice,destname,destpos,datereceived,docdate,admincode) VALUES (:doctype,:title,:author,:remarks,:added,:hrdbid,:admintype,:logtype,:refnumber,:sourceoffice,:sourcename,:sourcepos,:destoffice,:destname,:destpos,:resdate,:docdate,:admincode)");
                                         $stmt->bindParam(':doctype', $doctype);
@@ -359,12 +360,14 @@
                                         $stmt->bindParam(':docdate', $dateondoc);  
                                          $stmt->bindParam(':admincode', $_POST['admintype1']);                            
                                         $stmt->execute();
+
                                     } catch(PDOException $e) {
                                         echo "Error: " . $e->getMessage();
                                     }
+                                  
                             }//end if empty
                             else//not empty
-                            {                        
+                            {     
                                 if (file_exists($uploadfile)) {
                                     die("Duplicate found. This file already exists.");
                                 }
@@ -403,9 +406,11 @@
                                         $stmt->bindParam(':docdate', $dateondoc);  
                                           $stmt->bindParam(':admincode', $_POST['admintype1']);                          
                                         $stmt->execute();
+                                     
                                     } catch(PDOException $e) {
                                         echo "Error: " . $e->getMessage();
                                     }
+                                      
                                 }
                             }
                                   if ($_POST['switch']>0) {
@@ -415,10 +420,13 @@
                                         echo "Success";
                                   } else {
                                     echo "Success";
+                                    byteMe($_SESSION['id'],'upload',3);
                                   }
+                
                     } //end if admindoc
                    else //if not admin they required to insert a file 
                   {
+                             byteMe($_SESSION['id'],'upload',3);
                                 $ext=date("mdY");
                                 $maxsize=15000000;
                                 $FILE_EXTS = array('pdf','jpg','jpeg','png','xls','xlsx','doc','docx','zip');
@@ -478,6 +486,7 @@
                                     } catch(PDOException $e) {
                                         echo "Error: " . $e->getMessage();
                                     }
+
                                 }
                          if ($_POST['switch']>0) {
                                         $refid = $db->lastInsertId();
@@ -486,6 +495,7 @@
                                         echo "Success";
                                   } else {
                                     echo "Success";
+                                           byteMe($_SESSION['id'],'upload',3);
                                   }
                  }//end of else
         }
