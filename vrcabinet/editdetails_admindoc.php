@@ -373,7 +373,7 @@
     function typeChange3(){
     $('#refnumber').val($('#logtype option:selected').val()+'-'+$('#admintype option:selected').val()+'<?php 
      // $rd1 = explode('-', $rowadmin['added']);
-      $rd1 = explode('-', date('mdY',time()+ 72000));
+      $rd1 = explode('-', $rowadmin['added']);
       $result1  = "$rd1[1]$rd1[2]$rd1[0]";
        echo '-'.$result1.'-'.$rowadmin['id'];?>');
     }
@@ -418,7 +418,7 @@
                       </div>
                       <div class="form-group" id="admintypeholder">
                           <select class="form-control" id="admintype" name="admintype">
-                            <option value=""><?php echo $rowadmin['admindoctype'];?></option>
+                            <option value="<?php echo $rowadmin['admincode'];?>"><?php echo $rowadmin['admindoctype'];?></option>
                                <option value="">Select Admin Document Type</option>
                             <!-- get this --> 
                           <?php
@@ -444,7 +444,7 @@
                         <div class="col-sm-6">
                           <div class="form-group" id="logtypeholder">
                             <select class="form-control" id="logtype" name="logtype">
-                             <option value=""><?php echo $rowadmin['logtype'];?></option>
+                             <option value="<?php if($rowadmin['logtype']=='Incoming') { echo 'I'; }  else { echo 'O'; } ?>"><?php echo $rowadmin['logtype'];?></option>
                             <option value="">Select Log Type</option>
                             <option value="I">Incoming</option>
                             <option value="O">Outgoing</option>
@@ -918,7 +918,7 @@
         </form>
               </div>
               <div class="col-md-12" style="padding-right:0">
-                      <button id="uploadBtnadmin" class="btn btn-success pull-right" style="padding:6px 10px 6px 10px;margin-top:0.8em" onclick="typeChange3()"><span class="glyphicon glyphicon-cloud-upload"></span> ReUpload</button>
+                      <button id="uploadBtnadmin" class="btn btn-success pull-right" style="padding:6px 10px 6px 10px;margin-top:0.8em" onclick="typeChange3()"><span class="glyphicon glyphicon-cloud-upload"></span> Save</button>
               </div>
           </div>
       </div>
@@ -1026,7 +1026,7 @@
            fd.append('switch', switchClass);
            fd.append('emailarray', emailfinal.toString());
           $.ajax({
-                    url: 'functions.php',
+                    url: 'f.php',
                     dataType: 'text',
                     cache: false,
                     contentType: false,

@@ -994,6 +994,8 @@
            fd.append('ddate', $('input[name=ddate]').val());
            fd.append('remarks', $('textarea[name=remarks]').val());
            fd.append('admintype', $('#admintype option:selected').text());
+
+           fd.append('admintype1', $('#admintype option:selected').val());
            fd.append('logtype', $('#logtype option:selected').text());
            fd.append('refnumber', $('input[name=refnumber]').val());
            fd.append('sourceoffice',$('#autocompleteajax3').val());
@@ -1006,8 +1008,8 @@
            fd.append('switch', switchClass);
            fd.append('emailarray', emailfinal.toString());
            $.ajax({
-                    url: 'functions.php',
-                    dataType: 'text',
+                    url: 'f.php',
+                    dataType: 'text', 
                     cache: false,
                     contentType: false,
                     processData: false,
