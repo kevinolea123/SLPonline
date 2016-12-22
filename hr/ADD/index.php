@@ -502,8 +502,17 @@ function getProv() {
   url: "getLocations.php",
   data: formData,
   success: function(data) {
+        if($("#region").val()=="NPMO"){
+            $("#province").prop('disabled', true);
+            $("#province").val(" ");
+            $("#municipality").prop('disabled', true);
+            $("#municipality").val(" ");
+            
+          }else{
             $("#province").prop('disabled', false);
             $("#province").html(data);
+
+          }
         }
   });
 }
