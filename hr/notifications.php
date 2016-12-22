@@ -89,9 +89,12 @@ if(empty($_SESSION['emailaddress']))
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="../js/tag-it.js" type="text/javascript" charset="utf-8"></script>
 
+    <script type="text/javascript" src="../js/jquery.autocomplete.min.js"></script>
     <link rel="stylesheet" type="text/css" href="../css/jquery.datepick.css"> 
-<script type="text/javascript" src="../js/jquery.plugin.js"></script> 
-<script type="text/javascript" src="../js/jquery.datepick.js"></script>
+<!--<script type="text/javascript" src="../js/jquery.plugin.js"></script> 
+<script type="text/javascript" src="../js/jquery.datepick.js"></script>-->
+<script type="text/javascript" src="../js/jquery.datetimepicker.full.min.js"></script>
+  
 <script type="text/javascript" src="http://momentjs.com/downloads/moment.min.js"></script>
     
     
@@ -297,8 +300,8 @@ include "../nav.php";
             <div class="col-md-offset-2 col-md-8"><center>
               Tip: You can click on the rows to view more<br><br>
               <table cellpadding="0" cellspacing="0" border="0" class="table table-bordered table-hover hover" id="viewdata" style="background-color:#fff;width:100%">
-                      <thead>
-                        <th>Date</th>
+                      <thead >
+                        <th style="text-align:center">Date</th>
                         <th>Notification</th>
                         <th>Viewed</th>
                         <th></th>
@@ -324,14 +327,16 @@ include "../nav.php";
 
                   }
                 }
+                 $.fn.DataTable.ext.pager.numbers_length = 5;
                 oTable = $('#viewdata').dataTable({
                   "aProcessing": true,
                   "aServerSide": true,
                   "orderCellsTop": true,
-                  "pageLength": 20,
+                //  "pageLength": 20,
                   "order": [[7, "desc" ]],
                   "ajax": "dt_notifications2.php",
-                  "dom": '<"top">rt<"bottom"><"clear">',
+                  "dom": '<"top">rt<"bottom"ip><"clear">',
+                  // "aaSorting": [7,'desc'],
                   "language": {
                     "emptyTable": "No files are attached.."
                   },
@@ -350,7 +355,7 @@ include "../nav.php";
                             },
                             "mData": null,
                             "mRender": function( data, type, full) {
-                                  return '<td>'+parseDate(data[0])+'</td>'; 
+                                  return '<td>'+data[0]+'</td>'; 
                             }
                         },
                         { 
@@ -405,7 +410,7 @@ $('#viewdata').on( 'click', 'tbody tr', function () {
 
   <br>
 </div><!--endcontainerfluid-->
-<script>
+<script> /*
 $(document).ready(function() {
 document.getElementById("uploadbtn").onchange = function () {
     document.getElementById("uploadfilename").value = this.value;
@@ -495,7 +500,7 @@ $("#addrover").click(function(event) {
 
     });
 
-});//end doc ready
+});//end doc ready */
 </script>
 <script>
 $(document).ready(function() {
@@ -561,6 +566,5 @@ $("#deleterecord").click(function(event) {
 
 }); //enddocready
 </script>
-<script type="text/javascript" src="../js/jquery.autocomplete.min.js"></script>
 </body>
 </html>

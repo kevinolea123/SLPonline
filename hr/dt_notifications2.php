@@ -61,7 +61,7 @@ class TableData {
 			}
 		}
 		// SQL queries get data to display
-		$sQuery = "SELECT notifid, eventlink, notifier, msg, added, recipient, eventname, isclicked FROM `notifications` WHERE recipient = '".$_SESSION['id']."'";
+		$sQuery = "SELECT notifid, eventlink, notifier, msg, added, recipient, eventname, isclicked FROM notifications WHERE recipient = '".$_SESSION['id']."'";
 		$statement = $this->_db->prepare($sQuery);
 		// Bind parameters
 		if ( isset($_GET['sSearch']) && $_GET['sSearch'] != "" ) {
@@ -107,7 +107,7 @@ header('Cache-Control: no-store, no-cache, must-revalidate');
 // Create instance of TableData class
 $table_data = new TableData();
 // Get the data
-$table_data->get('notifications', 'id', array('added', 'notifier', 'msg', 'eventname', 'eventlink', 'roverid', 'isclicked', 'notifid'));
+$table_data->get('notifications', 'notifid', array('added', 'notifier', 'msg', 'eventname', 'eventlink', 'roverid', 'isclicked', 'notifid'));
 /*
  * Alternatively, you may want to use the same class for several differnt tables for different pages.
  * By adding something similar to the following to your .htaccess file you can control this a little more...
