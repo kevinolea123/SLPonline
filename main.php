@@ -589,9 +589,13 @@ try {
       </div>
       <img src="http://www.slp.ph/imgs/nprew.png" style="max-width:100%">
       <br><br>
-      Our sincerest congratulations on the successful NPREW at Hotel Rembrandt, Quezon City, Metro Manila last Dec. 01-04. Reference documents will be available in the e-library.
-      <br>
-      <br>
+      Our sincerest congratulations on the successful NPREW at Hotel Rembrandt, Quezon City, Metro Manila last Dec. 01-04.
+      <br><br>
+      <div style="font-size:1em;">
+      Reference Videos:<br>
+      NPREW 2016: Thrusts and Priorities<br><a href="https://www.youtube.com/playlist?list=PL0FtyzDtfxFkxmKnVtptLqeLVvhFVQiBy"><span class="label label-danger">Watch Here</span></a><br><br>
+      NPREW 2016: Issues and Concerns<br><a href="https://www.youtube.com/playlist?list=PL0FtyzDtfxFlDpGAQ5lPTclR00RbifxJ1"><span class="label label-danger">Watch Here</span></a>
+      </div><br>
     </div>
   </div>
 
