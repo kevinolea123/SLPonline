@@ -61,6 +61,7 @@ function timeago($ptime) {
     <link href="../css/jquery.tagit.css" rel="stylesheet" type="text/css">
     <link href="../css/tagit.ui-zendesk.css" rel="stylesheet" type="text/css">
     <link href="../css/jquery.cssemoticons.css" media="screen" rel="stylesheet" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="../lightbox/lightbox.css">
     <script src="../js/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="../js/jquery.dataTables.js"></script>
     <script src="../js/DTbootstrap.js"></script>
@@ -70,7 +71,11 @@ function timeago($ptime) {
     <script type="text/javascript" src="http://momentjs.com/downloads/moment.min.js"></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="../js/jquery.cssemoticons.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="../lightbox/lightbox.js"></script>
+   
     <style>
+
+  
  #small { font-size: 15px; }
  #large { font-size: 72px; }
  #regular { font-size: 20px; }
@@ -254,6 +259,15 @@ tbody tr {
 #box:hover #overlay {
   opacity:1;
 }
+
+  
+#overlay1{ background-image: url(../imgs/overlay.png); }
+
+* html #overlay1{
+  background-color: #333;
+  background-color: transparent;
+  background-image: url(blank.gif);
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src="../imgs/overlay.png", sizingMethod="scale");
 </style>
 </head>
 <body>
@@ -285,7 +299,7 @@ if ($_SESSION['permlvl']>0 || ($_SESSION['permlvl']<1 && $_SESSION['id']==$_SESS
                         echo '<img src="../imgs/female.png" style="margin-bottom:1em">';
                       }     
               } else {
-              echo '<img src="../../docs/profilepics/'.$p['name'].'" border="2" alt="myprofilepicture" width="200" height="200" vspace="5" style="border-radius:50%" />';
+              echo '<a href="../../docs/profilepics/'.$p['name'].'"" rel="lightbox" ><img src="../../docs/profilepics/'.$p['name'].'" border="2" alt="myprofilepicture" width="200" height="200" vspace="5" style="border-radius:50%" /></a>';
               }   
 } catch(PDOException $e) {
       echo "Error: " . $e->getMessage();
