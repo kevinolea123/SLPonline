@@ -135,10 +135,10 @@ byteMe($_SESSION['id'],'faqs',0.10); ?>
                   </div>
                         </div>
 
-                            <div class="panel-body"><span class="glyphicon glyphicon-menu-down" data-toggle="collapse" aria-hidden="true" href="#collapse6"></span>
-                            <a data-toggle="collapse" href="#collapse6"><b>What is the purpose of ROVER?</b></a>
+                            <div class="panel-body"><span class="glyphicon glyphicon-menu-down" data-toggle="collapse" aria-hidden="true" href="#collapse71"></span>
+                            <a data-toggle="collapse" href="#collapse71"><b>What is the purpose of ROVER?</b></a>
                           </div>                               
-                          <div id="collapse6" class="panel-collapse collapse">
+                          <div id="collapse71" class="panel-collapse collapse">
                   <div class="row"><img src="imgs/man-observe.png" class="img-rounded" style="width: 100px; height: 100px">
                     <div class="col-md-10">
                         <ul class="list-group">
@@ -213,10 +213,10 @@ byteMe($_SESSION['id'],'faqs',0.10); ?>
                   </div>
                         </div> 
 
-                  <div class="panel-body"><span class="glyphicon glyphicon-menu-down" data-toggle="collapse" aria-hidden="true" href="#collapse11"></span>
-                            <a data-toggle="collapse" href="#collapse11"><b>How do i go to the SLPIS website?</b></a>
+                  <div class="panel-body"><span class="glyphicon glyphicon-menu-down" data-toggle="collapse" aria-hidden="true" href="#collapse111"></span>
+                            <a data-toggle="collapse" href="#collapse111"><b>How do i go to the SLPIS website?</b></a>
                           </div>                                 
-                          <div id="collapse11" class="panel-collapse collapse">
+                          <div id="collapse111" class="panel-collapse collapse">
                   <div class="row"><img src="imgs/mobile-app-dev.png" class="img-rounded" style="width: 100px; height: 100px">
                     <div class="col-md-10">
                         <ul class="list-group">
